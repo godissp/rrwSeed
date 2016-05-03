@@ -1,0 +1,68 @@
+.addResource-wrap{
+    padding: 10px 10px 10px 20px;
+}
+.addResource-wrap ul,.addResource-wrap li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float:left;
+}
+.addResource-wrap .line-1,.addResource-wrap .line-2,.addResource-wrap .line-3,.addResource-wrap .line-3,.addResource-wrap .line-4{
+    overflow: hidden;
+    margin-top: 8px;
+}
+.addResource-wrap .line-1 label,.addResource-wrap .line-2 label,.addResource-wrap .line-3 label,.addResource-wrap .line-3 input,.addResource-wrap .line-4 label,.addResource-wrap .line-4 textarea{
+    float:left;
+}
+.addResource-wrap .line-3 input{
+    width: 160px;
+    margin-right: 10px;
+}
+.addResource-wrap .line-4 textarea{
+    width: 300px;
+    height: 60px;
+    resize:none;
+}
+.addResource-wrap .line-1 li,.addResource-wrap .line-2 li {
+    background-color: #0BAA3A;
+    padding: 4px 8px;
+    color: white;
+    width: 35px;
+    margin: 2px 2px;
+    cursor: pointer;
+}
+.addResource-wrap li.disable{
+    background-color: #B2B2B2 !important;
+    cursor: default;
+}
+.addResource-wrap li:hover{
+    background-color: #0DBC41 ;
+}
+.addResource-wrap li.active{
+    background-color: #2D91CF;
+}
+.addResource-wrap label{
+    padding-top: 4px;
+}
+.addResource-wrap input,.addResource-wrap textarea{
+    border-radius: 0;
+    border: solid 1px #8C8C8C;
+    margin: 2px 2px;
+    padding: 1px 4px;
+    background-color: #EBEBEB !important;
+    outline: none !important;
+    font-family: 微软雅黑;
+}
+.addResource-wrap input:focus,.addResource-wrap textarea:focus{
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(82,168,236,0.6);
+}
+.addResource-wrap .line-5 div{
+    float: right;
+    width: 50px;
+    padding: 2px;
+    background-color: rgb(43, 125, 188);
+    color: white;
+    margin: 5px;
+    margin-right: 25px;
+    cursor: pointer;
+}

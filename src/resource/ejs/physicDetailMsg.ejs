@@ -1,0 +1,40 @@
+
+    <div class="msgList" id="detailMsg">
+        <div class="itemStyle">
+            <span class="floatLeft">基本信息</span>
+            <br><br>
+            <table id="basicDetailMsg" class="detailTb">
+                <tr><th></th><th></th><th></th><th></th></tr>
+                <tr><td>机器名称</td><td><%=value[0].name%></td><td>产品ID</td><td>无</td></tr>
+                <tr><td>厂商名称</td><td>无</td><td>出厂日期</td><td>无</td></tr>
+            </table>
+        </div>
+        <br>
+        <div class="itemStyle">
+            <span class="floatLeft">配置信息</span>
+            <br><br>
+            <table id="configDetailMsg" class="detailTb">
+                <tr><th></th><th></th><th></th><th></th></tr>
+                <tr><td>CPU型号</td><td><%=value[0].cpuType%></td><td>CPU核数</td><td><%=value[0].coreNumber%></td></tr>
+                <tr><td>内存大小</td><td><%=value[0].memorySize%></td><td>磁盘空间</td><td><%=value[0].diskSize%></td></tr>
+                <tr><td>操作系统属性</td><td><%=value[0].osType%></td><td>操作系统版本</td><td><%=value[0].osVersion%></td></tr>
+                <tr><td>说明</td><td  colspan='3' style='text-align: left;padding-left: 5px;'><%=value[0].description == '0' ? '无' : value[0].description%></td></tr>
+
+            </table>
+        </div>
+        <br>
+        <div class="itemStyle">
+            <span class="floatLeft">区域信息</span>
+            <br><br>
+            <table id="areaDetailMsg" class="detailTb">
+                <tr><th></th><th></th><th></th><th></th></tr>
+                <tr><td>所属区域:</td><td><%=value[0].areaName%>
+                </td><td>机架编号:</td><td><%=value[0].rackName%>
+                </td></tr><tr><td>机架位置:</td><td><%=value[0].rackSeq%>
+                </td><td>责任人:</td><td>无
+                </td> </tr><tr><td>IP:</td><td><%=(value[0].ip == undefined ? '127.0.0.1' : value[0].ip)%>
+                </td></tr>
+            </table>
+        </div>
+        <br><br>
+    </div>

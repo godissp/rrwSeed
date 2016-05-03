@@ -1,0 +1,22 @@
+<div class="ipRelating-wrap">
+    <div class="row-1 form-row">
+        <label>外网IP</label>
+        <select class="ipRelating-wrap-fdip">
+            <%ipList.forEach(function(v,i){%>
+                <option><%=v.floatingIpAddress%></option>
+            <%})%>
+        </select>
+    </div>
+    <div class="row-2 form-row">
+        <label>内网IP</label>
+        <input class="ipRelating-wrap-gdip" type="text" value="<%=VCRIPS[0]%>" readonly />
+    </div>
+    <div class="row-3 form-row">
+        <div class="ipRelating-wrap-close">
+            取消
+        </div>
+        <div class="ipRelating-wrap-relate">
+            关联
+        </div>
+    </div>
+</div>

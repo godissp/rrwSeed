@@ -1,0 +1,57 @@
+.dropDwonList{
+    display: inline-block;
+    width: 200px;
+    user-select:none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    height:27px;
+    position: relative;
+    font-family: 微软雅黑;
+}
+.dropDwonList-main{
+    overflow: hidden;
+    border: solid 1px #B3B3B3;
+    width: 100%;
+    float: left;
+}
+.dropDwonList-icon{
+    background: url(imgs/inputBg.png);
+    width: 25px;
+    height: 25px;
+    float:left;
+    cursor:pointer;
+}
+.dropDwonList-input{
+    float: left;
+    height: 25px !important;
+    padding: 0 5px 0 10px !important;
+    border: none !important;
+    box-sizing: border-box;
+    margin: 0 !important;
+    font-family: 微软雅黑;
+}
+.dropDwonList-input:focus{
+    outline: none;
+}
+.dropDwonList-list{
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: solid 1px #B3B3B3;
+    float: left;
+    background-color: white;
+    position: absolute;
+    top: 27px;
+    left: 0;
+    z-index: 10;
+}
+.dropDwonList-list li{
+    list-style: none;
+    padding: 2px 0 2px 10px;
+    text-align: left;
+}
+.dropDwonList-list li:hover{
+    background: #45A3F1;
+    color: white;
+}

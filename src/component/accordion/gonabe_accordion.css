@@ -1,0 +1,39 @@
+.accordion-item-title{
+    background: #E9E9E9;
+    border: solid 1px #CECECE;
+    padding: 4px 10px;
+    font-family: 微软雅黑;
+    color: #4E4E4E;
+    margin-top: -1px;
+    cursor: pointer;
+}
+.accordion-item-title:hover {
+    background: #EFEFEF;
+    
+}
+.accordion-item-content{
+    /*overflow:hidden;*/
+}
+.accordion-item-title-add,.accordion-item-title-plus {
+    position: relative;
+    float: right;
+}
+.accordion-item-title-add:before {
+    content: '＋';
+    font-weight: 600;
+    font-size: 16px;
+    font-family: 微软雅黑;
+    color: #2E92D0;
+    cursor: pointer;
+}
+.accordion-item-title-plus:before {
+    content: '－';
+    font-weight: 600;
+    font-size: 16px;
+    font-family: hj;
+    color: #2E92D0;
+    cursor: pointer;
+}
+.clearfix{
+    clear: both;
+}

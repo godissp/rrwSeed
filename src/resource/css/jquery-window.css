@@ -1,0 +1,154 @@
+.window-mask{
+    position:absolute;
+    left: 0;
+    top: 0;
+    width:100%;
+    height:100%;
+    background-color: rgba(204, 204, 204,0);
+    text-align: center;
+    opacity: 0;
+    font-family: "微软雅黑";
+	
+}
+.window-mask.fix{
+    background-color: rgba(204, 204, 204,0.2);
+}
+.window-ver{
+    display: inline-block;
+    height: 100%;
+    width: 2px;
+    vertical-align: middle;
+}
+.window-wrap{
+	position:relative;
+    display: inline-block;
+    vertical-align: middle;
+    opacity: 0;
+    box-shadow: 6px 6px 20px 0px rgba(13, 12, 12, 0.8);
+    left:0;
+}
+.window-close{
+    background-image: url('../imgs/close.png');
+    display: inline-block;
+    background-size: 12px 12px;
+    width: 12px;
+    height: 12px;
+    float: right;
+    cursor: pointer;
+    position: relative;
+    top: 8px;
+    right: 10px;
+}
+.btn-ok{
+    float: right;
+    width: 64px;
+    height: 20px;
+    padding: 3px;
+    background: #4D9EE0;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0px 2px #2377BF;
+    margin-right: 15px;
+}
+.btn-cancel{
+    float: right;
+    width: 64px;
+    height: 20px;
+    padding: 3px;
+    background: #BFBFBF;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0px 2px #989697;
+    margin-right: 10px;
+}
+.window-titlePanel-window span,.window-titlePanel-confirm span,.window-titlePanel-prompt span{
+     line-height: 30px;
+     font-size: 16px;
+     float: left;
+     margin-left: 15px;
+     position: relative;
+     top: 1px;
+ }
+.window-mask-confirm{
+    position:absolute;
+    left: 0;
+    top: 0;
+    width:100%;
+    height:100%;
+    background-color: rgba(204, 204, 204,0);
+    text-align: center;
+    opacity: 0;
+    font-family: "微软雅黑";
+}
+.window-wrap-confirm,.window-wrap-prompt{
+    position:relative;
+    display: inline-block;
+    vertical-align: middle;
+    opacity: 0;
+    box-shadow: 6px 6px 20px 0px rgba(13, 12, 12, 0.8);
+    top: 25%;
+    left:0;
+}
+.confirm-content{
+    border-bottom: solid 1px #E3E3E3;
+    font-size: 14px;
+    text-align: center;
+    padding: 40px 30px;
+}
+.confirm-btns{
+    height: 35px;
+    margin: 0 auto;
+    font-size: 14px;
+    overflow: hidden;
+    padding: 10px 0 0 0;
+    background-color: #EBEBEB;
+}
+.window-contentPanel-window,.window-contentPanel-confirm,.window-contentPanel-prompt{
+    background-color: #FFFFFF;
+    margin: 0;
+}
+.window-titlePanel-window,.window-titlePanel-confirm{
+    height: 30px;
+    background-size: 5px 30px;
+    color: #323232;
+    position: relative;
+    top: 1px;
+    background-image: -webkit-linear-gradient(top,#FEFEFF,#D6D6D6);
+}
+.window-mask-prompt{
+    position:absolute;
+    left: 0;
+    top: 0;
+    width:100%;
+    height:100%;
+    background-color: rgba(204, 204, 204,0);
+    text-align: center;
+    opacity: 0;
+    font-family: "微软雅黑";
+}
+.prompt-content{
+    border-bottom: solid 1px #E3E3E3;
+    line-height: 100px;
+    height:100px;
+    font-size: 14px;
+    text-align: center;
+    padding: 0 10px;
+}
+.prompt-btns{
+    height: 35px;
+    margin: 0 auto;
+    font-size: 14px;
+    overflow: hidden;
+    padding: 10px 0 0 0;
+    background-color: #EBEBEB;
+}
+.window-contentPanel-prompt .prompt-input{
+    display: inline-block;
+    height: 27px !important;
+    line-height: 27px !important;
+    vertical-align: baseline !important;
+    border-radius: 0 !important;
+    background-color: #EBEBEB !important;
+}

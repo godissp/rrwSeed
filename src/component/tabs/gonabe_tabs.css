@@ -1,0 +1,28 @@
+.tabs-panel{
+    margin: 20px 30px 0 30px
+}
+.gonabe-tabs-titles{
+    margin:0;
+    height: 35px;
+    border-bottom: solid 1px #dadada;
+    overflow: hidden;
+}
+.gonabe-tabs-titles>.tabs-title{
+    float: left;
+    min-width: 70px;
+    padding: 0 10px;
+    background: #e9e9e9;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    margin-right: 1px;
+    color: #2e2e2e;
+    cursor: pointer;
+    -webkit-user-select:none;
+}
+.gonabe-tabs-titles>.tabs-title:hover{ background: #9fd8fa;}
+.gonabe-tabs-titles>.tabs-title.active{
+    background: #2d91cf;
+    height: 35px;
+    color: #f5f9fc;
+}

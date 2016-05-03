@@ -1,0 +1,41 @@
+
+.itemStyle{
+    margin-top: 10px;
+    position: relative;
+    left: 100px;
+    display: inline-block;
+    width: 800px;
+}
+.floatLeft{
+    float: left;
+    font-size: 16px;
+    font-family: "微软雅黑";
+    /*color: #646464;*/
+    width: 150px;
+    height: 45px;
+    text-align: left;
+    padding-top: 8px;
+    font-weight: lighter;
+}
+
+
+.msgList{
+    /*margin-top: 50px;*/
+    height: 500px;
+}
+.itemStyle table{
+    font-family: "微软雅黑";
+    font-size: 14px;
+    table-layout: fixed;
+}
+.itemStyle table th{
+    width: 120px;
+}
+.itemStyle table td{
+    width: 120px;
+    height: 30px;
+}
+#detailMsg tr td{
+    background-color:#FFFFFF !important;
+    text-align: left;
+}

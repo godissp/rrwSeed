@@ -1,0 +1,176 @@
+<style>
+   .physics-detail{
+        overflow: hidden;
+        background-color: #F6F6F6;
+        padding: 6px;
+        border-bottom: solid 1px #ccc;
+   }
+    .detail-name{
+        width: 320px;
+        margin-right: 30px;
+        float: left;
+        font-size: 25px;
+        text-align: center;
+        height: 50px;
+        border-right: solid 1px #ccc;
+        font-family: -webkit-pictograph;
+        font-weight: bold;
+    }
+    .detail-infos{
+        width: 250px;
+        float: left;
+        height: 50px;
+        border-right: solid 1px #ccc;
+        margin-right: 35px;
+    }
+    .detail-info{
+        width: 120px;
+        display: inline-block;
+        line-height: 25px;
+        font-size: 14px;
+    }
+    .detail-operation{
+        width: 100px;
+        float: left;
+        line-height: 50px;
+    }
+    .detail-operation>span{
+        cursor: pointer;
+        width: 30px;
+        height: 20px;
+        background-color: #2D91CF;
+        color: white;
+        padding: 4px 12px 6px;
+        border-radius: 2px;
+        font-size: 14px;
+    }
+    .physics-details-table{
+        width:730px;
+        text-align:center;
+        position: relative;
+    }
+    .physics-details-table th{
+        font-size: 14px;
+        font-weight: normal;
+        font-family: 微软雅黑;
+        color: #999292;
+    }
+    .physics-details-table td{
+        font-size: 14px;
+    }
+    .vm-lists{
+        padding:10px;
+    }
+    .vm-lists-title{
+        padding:0;margin:0;text-align: center;overflow: hidden;
+    }
+    .vm-lists-title li{
+        float:left;
+        font-size: 14px;
+        font-weight: normal;
+        font-family: 微软雅黑;
+        color: #999292;
+    }
+    .physics-details-table-wrap{
+        overflow: auto;
+        margin-top: 10px;
+        height: 180px;
+    }
+    .detail-name-name{
+        line-height: 30px;
+        font-size: 28px;
+        text-align: left;
+    }
+    .detail-name-operation{
+        font-size: 12px;
+        font-weight: normal;
+        color: #A6A5A5;
+        font-family: 微软雅黑;
+        float: left;
+    }
+    .detail-name-ip {
+        font-size: 12px;
+        font-weight: normal;
+        color: #A6A5A5;
+        font-family: 微软雅黑;
+        float: right;
+    }
+
+</style>
+
+<div class='detail-wrap' style='font-family:微软雅黑;text-align:left;'>
+    <div class='physics-detail'>
+        <div class='detail-name'>
+            <div style='display:inline-block;'>
+                <span>
+                    <%console.log(info)%>
+                    <div class='detail-name-name'><%=info.crName%></div>
+                    <div class='detail-name-ip'>192.168.1.1</div><div class='detail-name-operation'>window7</div>
+                </span>
+            </div>
+            <!--div><span>192.168.1.1</span><span>window7</span></div-->
+        </div>
+        <div class='detail-infos'>
+            <span class='detail-info'>负载情况：<%=status[info.comMonitorInfo.showStatus]%></span>
+            <span class='detail-info'>CPU：<%=info.comMonitorInfo.cpuallusage+'%'%></span>
+            <span class='detail-info'>硬盘：<%=info.comMonitorInfo.diskusage+'%'%></span>
+            <span class='detail-info'>内存：<%=info.comMonitorInfo.memusage+'%'%></span>
+        </div>
+        <div class='detail-operation'>
+            <span onclick='jQuery("#firessh",window.top.document).trigger("click")'>远程连接</span>
+        </div>
+    </div>
+    <div class='vm-lists'>
+        <ul class='vm-lists-title'>
+            <li style='width:82px'>操作系统</li>
+            <li style='width:126px'>ip地址</li>
+            <li style='width:41px'>状态</li>
+            <li style='width:376px;'>配置</li>
+            <li style='width:85px;'>操作</li>
+        </ul>
+        <div class="physics-details-table-wrap">
+            <table class="physics-details-table">
+                <thead style='visibility: hidden;'>
+                    <tr>
+                        <th style='width:78px'></th>
+                        <th style='width:125px'></th>
+                        <th style='width:40px'></th>
+                        <th style='width: 370px;'></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody style={{height:$(window).height()*0.3-45}}>
+                    <% vmLists.forEach(function(v,i){ %>
+                        <tr>
+                            <td ><%=v.osName%></td>
+                            <td ><%=v.ip%></td>
+                            <td  class="status"><%=["开机","待机","关机"][v.comMonitorInfo.showStatus]%></td>
+                            <td style='text-align:left;padding-left: 20px;' ><span>CPU：<%=v.comMonitorInfo.cpuallusage%>% 内存：<%=v.comMonitorInfo.memswap%>MB/ <%=v.memorySize%>GB 数据盘：<%=v.comMonitorInfo.diskusage/100* v.diskSize%>GB/<%=v.diskSize%>GB</span></td>
+                            <td>
+                                <select style='width: 75px;height:22px;font-size:14px;font-family:微软雅黑;padding:0;border-radius:0'
+                                    data-id='<%=v.crId%>'
+                                    data-memory='<%=v.memorySize%>'
+                                    data-core='<%=v.coreNumber%>'
+                                    data-disk='<%=v.diskSize%>'
+                                    onchange='operation()'>
+                                    <option value="0">请选择</option>
+                                    <option value="/dbp/service/infra/startVM/">开机</option>
+                                    <option value="/dbp/service/infra/shutdownVM/">关机</option>
+                                    <option value="/dbp/service/infra/restartVM/">重启</option>
+                                    <option value="/dbp/service/infra/VNC/">VNC访问</option>
+                                    <%if(v.virtualType===2){%>""<%}else{%><option>关联IP</option><%}%>
+                                    <%if(v.virtualType===2){%>""<%}else{%><option>扩容申请</option><%}%>
+                                    <%if(v.virtualType===2){%>""<%}else{%><option data-disk={v.diskSize}>扩展数据盘</option><%}%>
+                                    <%if(v.virtualType===2){%>""<%}else{%><option>详情</option><%}%>
+                                </select>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

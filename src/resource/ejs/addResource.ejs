@@ -1,0 +1,35 @@
+<div class="addResource-wrap">
+    <div class="line-1">
+        <label>CPU核数：</label>
+        <ul>
+            <%cpus.forEach(function(v){%>
+                <%if(v.DATA_NAME<=nowcpu){%>
+                <li class="disable" data-data="<%=v.DATA_NAME%>"><%=v.DATA_NAME%>核</li>
+                <%}else{%>
+                <li data-data="<%=v.DATA_NAME%>"><%=v.DATA_NAME%>核</li>
+                <%}%>
+            <%})%>
+        </ul>
+    </div>
+    <div class="line-2">
+        <label>内存大小：</label>
+        <ul>
+            <%cpus.forEach(function(v){%>
+                <%if(v.DATA_NAME<=nowmemory){%>
+                <li class="disable" data-data="<%=v.DATA_NAME%>"><%=v.DATA_NAME%>G</li>
+                <%}else{%>
+                <li data-data="<%=v.DATA_NAME%>"><%=v.DATA_NAME%>G</li>
+                <%}%>
+            <%})%>
+        </ul>
+    </div>
+    <div class="line-3">
+        <label>硬盘空间：</label>
+        <input class="inputdisk" placeholder="请输入大于<%=nowdisk%>的值">
+        <label>G</label>
+    </div>
+    <div class="line-4">
+        <label>申请理由：</label>
+        <textarea  class="inputreason" placeholder="请输入少于20个字符的理由"/>
+    </div>
+</div>

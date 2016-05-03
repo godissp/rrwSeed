@@ -1,0 +1,256 @@
+*{text-decoration: none; list-style: none; padding:0; margin:0; font-family:"΢���ź�"; color: #2d2d2d; }
+body,html{
+    height:100%;
+    overflow:hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+.main-wrap{
+    box-sizing: border-box;
+    padding: 15px 30px;
+    height:100%;
+    overflow: auto;
+    transition: all 0.2s cubic-bezier(.09,.84,.75,.88);
+    -moz-transition: all 0.2s cubic-bezier(.09,.84,.75,.88);
+    -webkit-transition: all 0.2s cubic-bezier(.09,.84,.75,.88);
+    -o-transition: all 0.2s cubic-bezier(.09,.84,.75,.88);
+}
+.details-wrap{
+    position: relative;
+    height:0;
+    transition: all 0.2s cubic-bezier(.09,.84,.75,.88);
+    -moz-transition: all 0.2s cubic-bezier(.09,.84,.75,.88);
+    -webkit-transition: all 0.2s cubic-bezier(.09,.84,.75,.88);
+    -o-transition: all 0.2s cubic-bezier(.09,.84,.75,.88);
+}
+.action{ width: 100%; height: 30px; background-color: #4c9ee1; }
+.remove{
+    position: absolute;
+    top: 7px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+.refresh{
+    position: absolute;
+    top: 7px;
+    right:60px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.content{
+    width:100%;
+    height:100%;
+    position: relative;
+    padding: 10px;
+    background-color: #939393;
+}
+.details-table{
+    overflow: hidden;
+    text-align: center;
+    transition:all 0.1s cubic-bezier(.09,.84,.75,.88);
+    -moz-transition: all 0.1s cubic-bezier(.09,.84,.75,.88);
+    -webkit-transition: all 0.1s cubic-bezier(.09,.84,.75,.88);
+    -o-transition: all 0.1s cubic-bezier(.09,.84,.75,.88);
+}
+.details-table thead{
+    position: absolute;
+    top: 10px;
+    height: 35px;
+    line-height: 35px;
+    background: #e6e6e6;
+    box-sizing: border-box;
+}
+.details-table tbody{
+    background-color: white;
+    position: absolute;
+    top: 45px;
+    width: 1680px;
+    height: 140px !important;
+    overflow: auto;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.details-table tbody tr td{
+    position:relative;
+    height: 35px;
+    line-height: 35px;
+}
+.even{ background-color: #f4f4f4; }
+.odd{ background-color: #fff;}
+
+.lists{
+    overflow: visible;
+    margin-right: -19px;
+    transition:all 0.3s cubic-bezier(.09,.84,.75,.88);
+    -moz-transition: all 0.3s cubic-bezier(.09,.84,.75,.88);
+    -webkit-transition: all 0.3s cubic-bezier(.09,.84,.75,.88);
+    -o-transition: all 0.3s cubic-bezier(.09,.84,.75,.88);
+}
+.item{
+    position: relative;
+    border:1px solid #d2d2d2;
+    width:310px;
+    height:160px;
+    float:left;
+    margin:10px 19px 10px 0;
+    cursor:pointer;
+}
+
+.Img{ margin:10px 5px 0px 10px;height:40px; }
+.Name{ font-size: 16px; line-height: 40px;}
+.item.active{
+   border: 1px solid #2d91cf;
+}
+.item table{
+    width:100%;
+    font-size: 14px;
+}
+
+.manage-btn{
+    opacity:0;
+    cursor: pointer;
+    width: 140px;
+    height:26px;
+    right: 0px;
+    top:0px;
+    position: absolute;
+    background-color: #eee;
+    border-radius: 0px;
+}
+
+.bg{
+    z-index:0;
+    position: absolute;
+    top:0px;
+    right:0px;
+    background: url("/dbp/pages/inframonitor/img/new/inputBg.png") no-repeat;
+}
+.deployed{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+.deployed-logic{
+    position: absolute;
+    top: 10px;
+    right: 42px;
+    cursor: pointer;
+}
+.pctype{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+.cz{
+   margin-right: 10px;
+    display: none;
+    cursor: pointer;
+}
+/*.deployed:hover .cz{*/
+    /*display: inline;*/
+/*}*/
+.deployed-logic:hover .cz{
+    display: inline;
+}
+.usr-1,.usr-2,.usr-3{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+}
+.regions{
+    margin:20px 30px 0 30px;
+    height: 35px;
+    border-bottom: solid 1px #dadada;
+}
+.regions>.region{
+    float: left;
+    width: 90px;
+    background: #e9e9e9;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    margin-right: 1px;
+    color: #2e2e2e;
+}
+.regions>.region:hover{ background: #9fd8fa;}
+.regions>.region.active{
+    background: #2d91cf;
+    height: 35px;
+    color: #f5f9fc;
+}
+.clearfix{
+    clear:both;
+}
+.checkbox{
+    float:left;
+    margin-right: 10px;
+}
+
+/*.crStatus, .vmNum, .usrId{ visibility: hidden;}*/
+.filter-1,.filter-2,.filter-3{
+   padding-left: -10px;
+}
+.operation{
+    background: #4963AE;
+    width: 40px;
+    height: 20px;
+    border-radius: 0px !important;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 2px 3px;
+}
+.operation-wrap{
+    position: absolute;
+    top: 10px;
+    right: 12px;
+}
+.ipRelating-wrap{
+    padding: 10px 10px 0 10px;
+}
+.form-row{
+    overflow: hidden;
+}
+.form-row label{
+    display: block;
+    margin-bottom: 5px;
+    float: left;
+    margin-left: 18px;
+    line-height: 30px;
+    width: 50px;
+}
+.form-row select,.form-row input{
+    width: 220px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    float: left;
+    margin-left: 20px;
+    height: 30px;
+}
+.row-3.form-row{
+    margin-top: 15px;
+}
+.row-3.form-row>div{
+    float: right;
+    width: 50px;
+    padding: 2px;
+    background-color: rgb(43, 125, 188);
+    color: white;
+    margin: 5px;
+    cursor: pointer;
+}
+.tick-icon{
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 11px;
+    height: 8px;
+}
