@@ -53,17 +53,7 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	/**
-	 * Created by Administrator on 2015/11/13.
-	 */
-	/**
-	 * 导入页面样式
-	 */
 	'use strict';
-	
-	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { 'default': obj };
-	}
 	
 	__webpack_require__(2);
 	
@@ -75,10 +65,6 @@
 	
 	__webpack_require__(15);
 	
-	/**
-	 * 导入react，redux，store以及相关action
-	 */
-	
 	var _react = __webpack_require__(18);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -87,24 +73,34 @@
 	
 	var _reactRedux = __webpack_require__(185);
 	
-	var _jsComponentsApp = __webpack_require__(211);
+	var _app = __webpack_require__(211);
 	
-	var _jsComponentsApp2 = _interopRequireDefault(_jsComponentsApp);
+	var _app2 = _interopRequireDefault(_app);
 	
-	var _jsStoreMainStore = __webpack_require__(216);
+	var _mainStore = __webpack_require__(216);
 	
-	var _jsPageEventPageEvent = __webpack_require__(223);
+	var _pageEvent = __webpack_require__(223);
 	
-	var _jsPageEventPageEvent2 = _interopRequireDefault(_jsPageEventPageEvent);
+	var _pageEvent2 = _interopRequireDefault(_pageEvent);
 	
-	var _jsActionsAjaxActions = __webpack_require__(221);
+	var _ajaxActions = __webpack_require__(221);
 	
 	__webpack_require__(282);
 	
 	__webpack_require__(283);
 	
+	function _interopRequireDefault(obj) {
+	    return obj && obj.__esModule ? obj : { default: obj };
+	}
+	
 	/**
 	 * 禁用右键按钮
+	 */
+	/**
+	 * Created by Administrator on 2015/11/13.
+	 */
+	/**
+	 * 导入页面样式
 	 */
 	document.addEventListener("contextmenu", function (e) {
 	    e.preventDefault();
@@ -113,16 +109,20 @@
 	/**
 	 * 获得分区列表数据后，初始化页面
 	 */
-	_jsPageEventPageEvent2['default'].addHandler('regionDataDone', function () {
-	    console.log(_react2['default']);
-	    (0, _reactDom.render)(_react2['default'].createElement(_reactRedux.Provider, { store: _jsStoreMainStore.store }, _react2['default'].createElement(_jsComponentsApp2['default'], null)), document.body);
-	    _jsStoreMainStore.store.dispatch((0, _jsActionsAjaxActions.getPhysicscomputerData)("/dbp/service/infra/getPhyCRListInfo"));
-	    _jsStoreMainStore.store.dispatch((0, _jsActionsAjaxActions.getVmcomputerData)("/dbp/service/infra/getVCRListInfo"));
-	    _jsStoreMainStore.store.dispatch((0, _jsActionsAjaxActions.getStatisticsData)("/dbp/service/infra/getQuanbuAreaComCount"));
-	    _jsStoreMainStore.store.dispatch((0, _jsActionsAjaxActions.getVmstatisticsData)("/dbp/service/infra/getQuanbuVCRCount"));
+	
+	/**
+	 * 导入react，redux，store以及相关action
+	 */
+	_pageEvent2.default.addHandler('regionDataDone', function () {
+	    console.log(_react2.default);
+	    (0, _reactDom.render)(_react2.default.createElement(_reactRedux.Provider, { store: _mainStore.store }, _react2.default.createElement(_app2.default, null)), document.body);
+	    _mainStore.store.dispatch((0, _ajaxActions.getPhysicscomputerData)("/dbp/service/infra/getPhyCRListInfo"));
+	    _mainStore.store.dispatch((0, _ajaxActions.getVmcomputerData)("/dbp/service/infra/getVCRListInfo"));
+	    _mainStore.store.dispatch((0, _ajaxActions.getStatisticsData)("/dbp/service/infra/getQuanbuAreaComCount"));
+	    _mainStore.store.dispatch((0, _ajaxActions.getVmstatisticsData)("/dbp/service/infra/getQuanbuVCRCount"));
 	    debugger;
 	    setInterval(function () {
-	        var areaId = _jsStoreMainStore.store.getState().region.areaId;
+	        var areaId = _mainStore.store.getState().region.areaId;
 	        var statisticsurl = "";
 	        var vmstatisticsurl = "";
 	        var physicsurl = "";
@@ -143,17 +143,17 @@
 	            statisticsurl = "/dbp/service/infra/getComCountByAreaID/" + areaId;
 	            vmstatisticsurl = "/dbp/service/infra/getVCRCountByAreaID/" + areaId + "/commit";
 	        }
-	        _jsStoreMainStore.store.dispatch((0, _jsActionsAjaxActions.getPhysicscomputerData)(physicsurl));
-	        _jsStoreMainStore.store.dispatch((0, _jsActionsAjaxActions.getVmcomputerData)(vmurl));
-	        _jsStoreMainStore.store.dispatch((0, _jsActionsAjaxActions.getStatisticsData)(statisticsurl));
-	        _jsStoreMainStore.store.dispatch((0, _jsActionsAjaxActions.getVmstatisticsData)(vmstatisticsurl));
+	        _mainStore.store.dispatch((0, _ajaxActions.getPhysicscomputerData)(physicsurl));
+	        _mainStore.store.dispatch((0, _ajaxActions.getVmcomputerData)(vmurl));
+	        _mainStore.store.dispatch((0, _ajaxActions.getStatisticsData)(statisticsurl));
+	        _mainStore.store.dispatch((0, _ajaxActions.getVmstatisticsData)(vmstatisticsurl));
 	    }, 5000);
 	});
 	
 	/**
 	 * 初始化分区列表数据，在action的callback回到中触发regionDataDone自定义事件
 	 */
-	_jsStoreMainStore.store.dispatch((0, _jsActionsAjaxActions.initPageRegion)("/dbp/service/infra/getAreaList"));
+	_mainStore.store.dispatch((0, _ajaxActions.initPageRegion)("/dbp/service/infra/getAreaList"));
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "main.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -22488,21 +22488,11 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	/**
-	 * Created by sp on 2015/12/17.
-	 */
-	/**
-	 * 导入jquery，以及相关jquery插件
-	 */
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	
-	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { 'default': obj };
-	}
 	
 	var _jquery = __webpack_require__(212);
 	
@@ -22512,66 +22502,66 @@
 	
 	__webpack_require__(215);
 	
-	/**
-	 * 导入react，redux，store以及相关action
-	 */
-	
 	var _react = __webpack_require__(18);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
 	var _reactRedux = __webpack_require__(185);
 	
-	var _storeMainStore = __webpack_require__(216);
+	var _mainStore = __webpack_require__(216);
 	
-	var _actionsAjaxActionsJs = __webpack_require__(221);
+	var _ajaxActions = __webpack_require__(221);
 	
-	var _actionsReduceActionJs = __webpack_require__(222);
+	var _reduceAction = __webpack_require__(222);
+	
+	var _gonabe_tabs = __webpack_require__(232);
+	
+	var _gonabe_tabs2 = _interopRequireDefault(_gonabe_tabs);
+	
+	var _gonabe_accordion = __webpack_require__(235);
+	
+	var _gonabe_accordion2 = _interopRequireDefault(_gonabe_accordion);
+	
+	var _statisticsList = __webpack_require__(238);
+	
+	var _statisticsList2 = _interopRequireDefault(_statisticsList);
+	
+	var _vmStatisticsList = __webpack_require__(263);
+	
+	var _vmStatisticsList2 = _interopRequireDefault(_vmStatisticsList);
+	
+	var _computerList = __webpack_require__(239);
+	
+	var _computerList2 = _interopRequireDefault(_computerList);
+	
+	var _vmComputerList = __webpack_require__(266);
+	
+	var _vmComputerList2 = _interopRequireDefault(_vmComputerList);
+	
+	var _vmList = __webpack_require__(275);
+	
+	var _vmList2 = _interopRequireDefault(_vmList);
+	
+	function _interopRequireDefault(obj) {
+	    return obj && obj.__esModule ? obj : { default: obj };
+	}
 	
 	/**
-	 * 导入react ui组件
+	 * 导入react，redux，store以及相关action
 	 */
 	
-	var _componentTabsGonabe_tabsJs = __webpack_require__(232);
-	
-	var _componentTabsGonabe_tabsJs2 = _interopRequireDefault(_componentTabsGonabe_tabsJs);
-	
-	var _componentAccordionGonabe_accordionJs = __webpack_require__(235);
-	
-	var _componentAccordionGonabe_accordionJs2 = _interopRequireDefault(_componentAccordionGonabe_accordionJs);
-	
-	var _statisticsListJs = __webpack_require__(238);
-	
-	var _statisticsListJs2 = _interopRequireDefault(_statisticsListJs);
-	
-	var _vmStatisticsListJs = __webpack_require__(263);
-	
-	var _vmStatisticsListJs2 = _interopRequireDefault(_vmStatisticsListJs);
-	
-	var _computerListJs = __webpack_require__(239);
-	
-	var _computerListJs2 = _interopRequireDefault(_computerListJs);
-	
-	var _vmComputerListJs = __webpack_require__(266);
-	
-	var _vmComputerListJs2 = _interopRequireDefault(_vmComputerListJs);
-	
-	var _vmListJs = __webpack_require__(275);
-	
-	var _vmListJs2 = _interopRequireDefault(_vmListJs);
-	
-	var App = _react2['default'].createClass({
+	var App = _react2.default.createClass({
 	    displayName: 'App',
 	
 	    //点击物理机显示虚拟机列表
 	    showVmList: function showVmList(id, name) {
-	        (0, _jquery2['default'])(".details-wrap").height("30%");
-	        (0, _jquery2['default'])(".main-wrap").height((0, _jquery2['default'])(window).height() * 0.7 - 56);
-	        (0, _jquery2['default'])(".details-table tbody").height((0, _jquery2['default'])(window).height() * 0.3 - 45);
-	        (0, _jquery2['default'])(".details-table").css({ opacity: 1 });
+	        (0, _jquery2.default)(".details-wrap").height("30%");
+	        (0, _jquery2.default)(".main-wrap").height((0, _jquery2.default)(window).height() * 0.7 - 56);
+	        (0, _jquery2.default)(".details-table tbody").height((0, _jquery2.default)(window).height() * 0.3 - 45);
+	        (0, _jquery2.default)(".details-table").css({ opacity: 1 });
 	        this.setState({ physicsName: name });
 	        var vmurl = "/dbp/service/infra/getVCRListInfoByPhyCRID/" + id;
-	        _storeMainStore.store.dispatch((0, _actionsAjaxActionsJs.getVmlistData)(vmurl));
+	        _mainStore.store.dispatch((0, _ajaxActions.getVmlistData)(vmurl));
 	    },
 	    updateEle: function updateEle(obj) {
 	        this.setState({ areaId: obj.areaId, areaName: obj.areaName });
@@ -22597,27 +22587,27 @@
 	            statisticsurl = "/dbp/service/infra/getComCountByAreaID/" + areaId;
 	            vmstatisticsurl = "/dbp/service/infra/getVCRCountByAreaID/" + areaId + "/commit";
 	        }
-	        _storeMainStore.store.dispatch((0, _actionsReduceActionJs.switchRegion)(obj));
-	        _storeMainStore.store.dispatch((0, _actionsAjaxActionsJs.getPhysicscomputerData)(physicsurl));
-	        _storeMainStore.store.dispatch((0, _actionsAjaxActionsJs.getVmcomputerData)(vmurl));
-	        _storeMainStore.store.dispatch((0, _actionsAjaxActionsJs.getStatisticsData)(statisticsurl));
-	        _storeMainStore.store.dispatch((0, _actionsAjaxActionsJs.getVmstatisticsData)(vmstatisticsurl));
+	        _mainStore.store.dispatch((0, _reduceAction.switchRegion)(obj));
+	        _mainStore.store.dispatch((0, _ajaxActions.getPhysicscomputerData)(physicsurl));
+	        _mainStore.store.dispatch((0, _ajaxActions.getVmcomputerData)(vmurl));
+	        _mainStore.store.dispatch((0, _ajaxActions.getStatisticsData)(statisticsurl));
+	        _mainStore.store.dispatch((0, _ajaxActions.getVmstatisticsData)(vmstatisticsurl));
 	    },
 	    updateFilter: function updateFilter() {
 	        this.forceUpdate();
 	    },
 	    changeStatistics: function changeStatistics(obj) {
 	        if (obj.title === "物理机") {
-	            _storeMainStore.store.dispatch((0, _actionsReduceActionJs.changeStatisticsType)("physics"));
+	            _mainStore.store.dispatch((0, _reduceAction.changeStatisticsType)("physics"));
 	        } else {
-	            _storeMainStore.store.dispatch((0, _actionsReduceActionJs.changeStatisticsType)("vm"));
+	            _mainStore.store.dispatch((0, _reduceAction.changeStatisticsType)("vm"));
 	        }
 	    },
 	    setResource: function setResource() {
-	        var updateData = (function () {
-	            this.updateEle(_storeMainStore.store.getState().region);
-	        }).bind(this);
-	        var win = _jquery2['default'].window({ id: "flow-after", title: "物理资源划分", close: true, width: 1100, height: 650 });
+	        var updateData = function () {
+	            this.updateEle(_mainStore.store.getState().region);
+	        }.bind(this);
+	        var win = _jquery2.default.window({ id: "flow-after", title: "物理资源划分", close: true, width: 1100, height: 650 });
 	        var iframe = document.createElement("iframe");
 	        iframe.src = "/dbp/pages/inframonitor/AreaCRUpdate.jsp?" + encodeURIComponent('areaid=' + this.state.areaId + '&areaName=' + this.state.areaName + '&type=physics');
 	        iframe.width = "99%";
@@ -22632,13 +22622,23 @@
 	    },
 	    render: function render() {
 	        var listsData = this.props.accordionList;
-	        listsData[0].content = _react2['default'].createElement(_computerListJs2['default'], { showVmList: this.showVmList, listData: this.props.computerLists });
-	        listsData[1].content = _react2['default'].createElement(_vmComputerListJs2['default'], { showVmList: this.showVmList, listData: this.props.vmcomputerLists });
-	        return _react2['default'].createElement('div', null, _react2['default'].createElement('div', { className: 'setting', onClick: this.setResource, title: '资源设置', style: { display: this.state.areaId ? "block" : "none" } }, '设置'), _react2['default'].createElement(_componentTabsGonabe_tabsJs2['default'], { data: this.props.tabs, dataMap: { "name": "areaName" }, doSomething: this.updateEle }), _react2['default'].createElement('div', { className: 'main-wrap', style: { height: (0, _jquery2['default'])(window).height() - 56 + "px" } }, _react2['default'].createElement('div', { className: 'statistics' }, this.props.statisticsType === "physics" ? _react2['default'].createElement(_statisticsListJs2['default'], { doSomething: this.updateFilter, listData: this.props.statistics }) : _react2['default'].createElement(_vmStatisticsListJs2['default'], { doSomething: this.updateFilter, listData: this.props.vmstatistics }), _react2['default'].createElement('div', { className: 'clearfix' })), _react2['default'].createElement('div', { className: 'lists' }, _react2['default'].createElement(_componentAccordionGonabe_accordionJs2['default'], { data: listsData, doSomething: this.changeStatistics }))), _react2['default'].createElement('div', { className: 'details-wrap' }, _react2['default'].createElement(_vmListJs2['default'], { physicsName: this.state.physicsName, listData: this.props.vmList })));
+	        listsData[0].content = _react2.default.createElement(_computerList2.default, { showVmList: this.showVmList, listData: this.props.computerLists });
+	        listsData[1].content = _react2.default.createElement(_vmComputerList2.default, { showVmList: this.showVmList, listData: this.props.vmcomputerLists });
+	        return _react2.default.createElement('div', null, _react2.default.createElement('div', { className: 'setting', onClick: this.setResource, title: '资源设置', style: { display: this.state.areaId ? "block" : "none" } }, '设置'), _react2.default.createElement(_gonabe_tabs2.default, { data: this.props.tabs, dataMap: { "name": "areaName" }, doSomething: this.updateEle }), _react2.default.createElement('div', { className: 'main-wrap', style: { height: (0, _jquery2.default)(window).height() - 56 + "px" } }, _react2.default.createElement('div', { className: 'statistics' }, this.props.statisticsType === "physics" ? _react2.default.createElement(_statisticsList2.default, { doSomething: this.updateFilter, listData: this.props.statistics }) : _react2.default.createElement(_vmStatisticsList2.default, { doSomething: this.updateFilter, listData: this.props.vmstatistics }), _react2.default.createElement('div', { className: 'clearfix' })), _react2.default.createElement('div', { className: 'lists' }, _react2.default.createElement(_gonabe_accordion2.default, { data: listsData, doSomething: this.changeStatistics }))), _react2.default.createElement('div', { className: 'details-wrap' }, _react2.default.createElement(_vmList2.default, { physicsName: this.state.physicsName, listData: this.props.vmList })));
 	    }
 	});
 	
 	//将store的state中的key，value映射到App的props中
+	
+	/**
+	 * 导入react ui组件
+	 */
+	/**
+	 * Created by sp on 2015/12/17.
+	 */
+	/**
+	 * 导入jquery，以及相关jquery插件
+	 */
 	function mapStateToProps(state) {
 	    var props = {};
 	    Object.keys(state).forEach(function (key) {
@@ -22647,8 +22647,7 @@
 	    return props;
 	}
 	console.log(_reactRedux.connect);
-	exports['default'] = App = (0, _reactRedux.connect)(mapStateToProps)(App);
-	module.exports = exports['default'];
+	exports.default = App = (0, _reactRedux.connect)(mapStateToProps)(App);
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "app.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -32513,6 +32512,8 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
+	"use strict";
+	
 	/**
 	 * Created by SP on 2015/5/15.
 	 * 1.弹出框插件，此插件依赖于jquery
@@ -32521,12 +32522,12 @@
 	//;var jQuery = jQuery?jQuery:$;
 	//if(!('jQuery' in window)){
 	//	var jQuery = $
-	"use strict";
+	//}
 	
 	(function ($) {
 		;$.extend({
 			windowNum: 0,
-			window: (function (_window) {
+			window: function (_window) {
 				function window(_x) {
 					return _window.apply(this, arguments);
 				}
@@ -32536,7 +32537,7 @@
 				};
 	
 				return window;
-			})(function (params) {
+			}(function (params) {
 				$.windowNum += 1;
 				var id = params.id || "";
 				var windowNum = $.windowNum;
@@ -32720,8 +32721,7 @@
 			}
 		});
 	})(jQuery);
-	//}
-
+	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "jquery-window.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
@@ -32730,11 +32730,12 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
+	'use strict';
+	
 	/**
 	 * Created by SP on 2015/5/15.
 	 * 加载器插件
 	 */
-	'use strict';
 	
 	;(function ($) {
 	    $.extend({
@@ -32761,13 +32762,10 @@
 	
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	
-	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { 'default': obj };
-	}
+	exports.store = undefined;
 	
 	var _redux = __webpack_require__(192);
 	
@@ -32779,22 +32777,26 @@
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
-	var _reducersMainReducer = __webpack_require__(219);
+	var _mainReducer = __webpack_require__(219);
 	
-	var _reducersMainReducer2 = _interopRequireDefault(_reducersMainReducer);
+	var _mainReducer2 = _interopRequireDefault(_mainReducer);
 	
-	var _actionsAjaxActionsJs = __webpack_require__(221);
+	var _ajaxActions = __webpack_require__(221);
+	
+	function _interopRequireDefault(obj) {
+	    return obj && obj.__esModule ? obj : { default: obj };
+	}
 	
 	/**
 	 * 为store添加ajax和log的中间件
 	 */
-	var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_reduxAjax2['default'])(_redux.createStore);
+	var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_reduxAjax2.default)(_redux.createStore);
 	
 	/**
 	 * 生成新的createStore方法，为configureStore
 	 */
 	function configureStore(initialState) {
-	    var store = createStoreWithMiddleware(_reducersMainReducer2['default'], initialState);
+	    var store = createStoreWithMiddleware(_mainReducer2.default, initialState);
 	    if (false) {
 	        // Enable Webpack hot module replacement for reducers
 	        module.hot.accept('../reducers', function () {
@@ -32810,7 +32812,7 @@
 	 */
 	var store = configureStore();
 	
-	exports['default'] = configureStore;
+	exports.default = configureStore;
 	exports.store = store;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "mainStore.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -33094,19 +33096,20 @@
 	
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 	
 	var _redux = __webpack_require__(192);
 	
-	var _actionsConstants = __webpack_require__(220);
+	var _constants = __webpack_require__(220);
 	
-	function tabs(state, action) {
-	    if (state === undefined) state = [];
+	function tabs() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	    var action = arguments[1];
 	
 	    switch (action.type) {
-	        case _actionsConstants.RENDER_REGION:
+	        case _constants.RENDER_REGION:
 	            var titleList = action.data.filter(function (v, i) {
 	                if (v.areaType === 1) {
 	                    return true;
@@ -33119,99 +33122,109 @@
 	            return state;
 	    }
 	}
-	function region(state, action) {
-	    if (state === undefined) state = { areaId: "", areaName: "全部" };
+	function region() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? { areaId: "", areaName: "全部" } : arguments[0];
+	    var action = arguments[1];
 	
 	    switch (action.type) {
-	        case _actionsConstants.SWITCH_REGION:
+	        case _constants.SWITCH_REGION:
 	            return action.data;
 	        default:
 	            return state;
 	    }
 	}
-	function statistics(state, action) {
-	    if (state === undefined) state = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	function statistics() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] : arguments[0];
+	    var action = arguments[1];
 	
 	    switch (action.type) {
-	        case _actionsConstants.RENDER_STATISTICS:
+	        case _constants.RENDER_STATISTICS:
 	            return action.data;
 	        default:
 	            return state;
 	    }
 	}
-	function vmstatistics(state, action) {
-	    if (state === undefined) state = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	function vmstatistics() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] : arguments[0];
+	    var action = arguments[1];
 	
 	    switch (action.type) {
-	        case _actionsConstants.RENDER_VMSTATISTICS:
+	        case _constants.RENDER_VMSTATISTICS:
 	            return action.data;
 	        default:
 	            return state;
 	    }
 	}
-	function accordion(state, action) {
-	    if (state === undefined) state = [];
+	function accordion() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	    var action = arguments[1];
 	
 	    switch (action.type) {
 	        default:
 	            return state;
 	    }
 	}
-	function computerLists(state, action) {
-	    if (state === undefined) state = [];
+	function computerLists() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	    var action = arguments[1];
 	
 	    switch (action.type) {
-	        case _actionsConstants.RENDER_PHYSICSCOMPUTER:
+	        case _constants.RENDER_PHYSICSCOMPUTER:
 	            return action.data;
 	        default:
 	            return state;
 	    }
 	}
-	function vmcomputerLists(state, action) {
-	    if (state === undefined) state = [];
+	function vmcomputerLists() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	    var action = arguments[1];
 	
 	    switch (action.type) {
-	        case _actionsConstants.RENDER_VMCOMPUTER:
+	        case _constants.RENDER_VMCOMPUTER:
 	            return action.data;
 	        default:
 	            return state;
 	    }
 	}
-	function vmList(state, action) {
-	    if (state === undefined) state = [];
+	function vmList() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	    var action = arguments[1];
 	
 	    switch (action.type) {
-	        case _actionsConstants.RENDER_VMLIST:
+	        case _constants.RENDER_VMLIST:
 	            return action.data;
 	        default:
 	            return state;
 	    }
 	}
-	function accordionList(state, action) {
-	    if (state === undefined) state = [{ status: "plus", title: "物理机" }, { status: "add", title: "虚拟机" }];
+	function accordionList() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? [{ status: "plus", title: "物理机" }, { status: "add", title: "虚拟机" }] : arguments[0];
+	    var action = arguments[1];
 	
 	    switch (action.type) {
-	        case _actionsConstants.RENDER_ACCORDION:
+	        case _constants.RENDER_ACCORDION:
 	            return action.data;
 	        default:
 	            return state;
 	    }
 	}
-	function showSetting(state, action) {
-	    if (state === undefined) state = true;
+	function showSetting() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+	    var action = arguments[1];
 	
 	    switch (action.type) {
-	        case _actionsConstants.SHOW_SETTING:
+	        case _constants.SHOW_SETTING:
 	            return action.data;
 	        default:
 	            return state;
 	    }
 	}
-	function statisticsType(state, action) {
-	    if (state === undefined) state = "physics";
+	function statisticsType() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? "physics" : arguments[0];
+	    var action = arguments[1];
 	
 	    switch (action.type) {
-	        case _actionsConstants.CHANGE_STATISTICS_TYPE:
+	        case _constants.CHANGE_STATISTICS_TYPE:
 	            return action.data;
 	        default:
 	            return state;
@@ -33222,8 +33235,7 @@
 	    tabs: tabs, region: region, statistics: statistics, vmstatistics: vmstatistics, accordion: accordion, computerLists: computerLists, vmcomputerLists: vmcomputerLists, vmList: vmList, accordionList: accordionList, showSetting: showSetting, statisticsType: statisticsType
 	});
 	
-	exports['default'] = rootReducer;
-	module.exports = exports['default'];
+	exports.default = rootReducer;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "mainReducer.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -33233,6 +33245,11 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	/**
 	 * Created by Administrator on 2015/12/16.
 	 */
@@ -33241,66 +33258,44 @@
 	 * actions to ajax
 	 */
 	//获得分区列表数据，并初始化页面
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	var INIT_PAGE_REGION = 'INIT_PAGE_REGION';
-	exports.INIT_PAGE_REGION = INIT_PAGE_REGION;
+	var INIT_PAGE_REGION = exports.INIT_PAGE_REGION = 'INIT_PAGE_REGION';
 	//获取分区列表数据，并更新store
-	var GET_REGION_DATA = 'GET_REGION_DATA';
-	exports.GET_REGION_DATA = GET_REGION_DATA;
+	var GET_REGION_DATA = exports.GET_REGION_DATA = 'GET_REGION_DATA';
 	//获取物理机统计数据，并更新store
-	var GET_STATISTICS_DATA = 'GET_STATISTICS_DATA';
-	exports.GET_STATISTICS_DATA = GET_STATISTICS_DATA;
+	var GET_STATISTICS_DATA = exports.GET_STATISTICS_DATA = 'GET_STATISTICS_DATA';
 	//获取虚拟机数据，并更新store
-	var GET_VMSTATISTICS_DATA = 'GET_VMSTATISTICS_DATA';
-	exports.GET_VMSTATISTICS_DATA = GET_VMSTATISTICS_DATA;
+	var GET_VMSTATISTICS_DATA = exports.GET_VMSTATISTICS_DATA = 'GET_VMSTATISTICS_DATA';
 	//获取物理列表数据，并更新store
-	var GET_PHYSICSCOMPUTER_DATA = 'GET_PHYSICSCOMPUTER_DATA';
-	exports.GET_PHYSICSCOMPUTER_DATA = GET_PHYSICSCOMPUTER_DATA;
+	var GET_PHYSICSCOMPUTER_DATA = exports.GET_PHYSICSCOMPUTER_DATA = 'GET_PHYSICSCOMPUTER_DATA';
 	//获取虚拟列表数据，并更新store
-	var GET_VMCOMPUTER_DATA = 'GET_VMCOMPUTER_DATA';
-	exports.GET_VMCOMPUTER_DATA = GET_VMCOMPUTER_DATA;
+	var GET_VMCOMPUTER_DATA = exports.GET_VMCOMPUTER_DATA = 'GET_VMCOMPUTER_DATA';
 	//获取某个物理机对应的虚拟列表数据，并更新store
-	var GET_VMLIST_DATA = 'GET_VMLIST_DATA';
+	var GET_VMLIST_DATA = exports.GET_VMLIST_DATA = 'GET_VMLIST_DATA';
 	
-	exports.GET_VMLIST_DATA = GET_VMLIST_DATA;
 	/**
 	 * actions to reducers
 	 */
 	//更新分区列表
-	var RENDER_REGION = 'RENDER_REGION';
-	exports.RENDER_REGION = RENDER_REGION;
+	var RENDER_REGION = exports.RENDER_REGION = 'RENDER_REGION';
 	//切换分区信息
-	var SWITCH_REGION = 'SWITCH_REGION';
-	exports.SWITCH_REGION = SWITCH_REGION;
+	var SWITCH_REGION = exports.SWITCH_REGION = 'SWITCH_REGION';
 	//更新物理统计数据
-	var RENDER_STATISTICS = 'RENDER_STATISTICS';
-	exports.RENDER_STATISTICS = RENDER_STATISTICS;
+	var RENDER_STATISTICS = exports.RENDER_STATISTICS = 'RENDER_STATISTICS';
 	//更新虚拟机统计数据
-	var RENDER_VMSTATISTICS = 'RENDER_VMSTATISTICS';
-	exports.RENDER_VMSTATISTICS = RENDER_VMSTATISTICS;
+	var RENDER_VMSTATISTICS = exports.RENDER_VMSTATISTICS = 'RENDER_VMSTATISTICS';
 	//更新物理机列表
-	var RENDER_PHYSICSCOMPUTER = 'RENDER_PHYSICSCOMPUTER';
-	exports.RENDER_PHYSICSCOMPUTER = RENDER_PHYSICSCOMPUTER;
+	var RENDER_PHYSICSCOMPUTER = exports.RENDER_PHYSICSCOMPUTER = 'RENDER_PHYSICSCOMPUTER';
 	//更新虚拟机列表
-	var RENDER_VMCOMPUTER = 'RENDER_VMCOMPUTER';
-	exports.RENDER_VMCOMPUTER = RENDER_VMCOMPUTER;
+	var RENDER_VMCOMPUTER = exports.RENDER_VMCOMPUTER = 'RENDER_VMCOMPUTER';
 	//更新下来虚拟机列表
-	var RENDER_VMLIST = 'RENDER_VMLIST';
-	exports.RENDER_VMLIST = RENDER_VMLIST;
+	var RENDER_VMLIST = exports.RENDER_VMLIST = 'RENDER_VMLIST';
 	//更新折叠窗信息
-	var RENDER_ACCORDION = 'RENDER_ACCORDION';
-	exports.RENDER_ACCORDION = RENDER_ACCORDION;
+	var RENDER_ACCORDION = exports.RENDER_ACCORDION = 'RENDER_ACCORDION';
 	//更新统计列表显示状态
-	var CHANGE_STATISTICS_TYPE = 'CHANGE_STATISTICS_TYPE';
+	var CHANGE_STATISTICS_TYPE = exports.CHANGE_STATISTICS_TYPE = 'CHANGE_STATISTICS_TYPE';
 	
-	exports.CHANGE_STATISTICS_TYPE = CHANGE_STATISTICS_TYPE;
 	//暂未使用
-	var SHOW_SETTING = 'SHOW_SETTING';
-	exports.SHOW_SETTING = SHOW_SETTING;
+	var SHOW_SETTING = exports.SHOW_SETTING = 'SHOW_SETTING';
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "constants.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -33310,12 +33305,9 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	/**
-	 * Created by Administrator on 2015/12/16.
-	 */
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 	exports.initPageRegion = initPageRegion;
@@ -33326,17 +33318,17 @@
 	exports.getVmcomputerData = getVmcomputerData;
 	exports.getVmlistData = getVmlistData;
 	
-	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { 'default': obj };
-	}
-	
 	var _constants = __webpack_require__(220);
 	
 	var _reduceAction = __webpack_require__(222);
 	
-	var _pageEventPageEvent = __webpack_require__(223);
+	var _pageEvent = __webpack_require__(223);
 	
-	var _pageEventPageEvent2 = _interopRequireDefault(_pageEventPageEvent);
+	var _pageEvent2 = _interopRequireDefault(_pageEvent);
+	
+	function _interopRequireDefault(obj) {
+	    return obj && obj.__esModule ? obj : { default: obj };
+	}
 	
 	function initPageRegion(url) {
 	    return {
@@ -33349,17 +33341,19 @@
 	        },
 	        callBack: function callBack(v, dispatch) {
 	            dispatch((0, _reduceAction.renderRegion)(v));
-	            _pageEventPageEvent2['default'].fire({ type: 'regionDataDone' });
+	            _pageEvent2.default.fire({ type: 'regionDataDone' });
 	        },
 	        failCallBack: function failCallBack(v, dispatch) {
 	            // console.log('try')
 	            // console.log(require('../../json/initPageRegion.json'))
 	            //alert(JSON.stringify(require('../../json/initPageRegion.json')))
 	            dispatch((0, _reduceAction.renderRegion)(__webpack_require__(225)));
-	            _pageEventPageEvent2['default'].fire({ type: 'regionDataDone' });
+	            _pageEvent2.default.fire({ type: 'regionDataDone' });
 	        }
 	    };
-	}
+	} /**
+	   * Created by Administrator on 2015/12/16.
+	   */
 	
 	function getRegionData(url) {
 	    return {
@@ -33437,7 +33431,6 @@
 	        }
 	    };
 	}
-	
 	function getVmcomputerData(url) {
 	    return {
 	        type: _constants.GET_VMCOMPUTER_DATA,
@@ -33456,7 +33449,6 @@
 	        }
 	    };
 	}
-	
 	function getVmlistData(url) {
 	    return {
 	        type: _constants.GET_VMLIST_DATA,
@@ -33484,12 +33476,9 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	/**
-	 * Created by Administrator on 2015/12/15.
-	 */
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 	exports.renderRegion = renderRegion;
@@ -33510,7 +33499,9 @@
 	        type: _constants.RENDER_REGION,
 	        data: data
 	    };
-	}
+	} /**
+	   * Created by Administrator on 2015/12/15.
+	   */
 	
 	function switchRegion(data) {
 	    return {
@@ -33518,56 +33509,48 @@
 	        data: data
 	    };
 	}
-	
 	function renderStatistics(data) {
 	    return {
 	        type: _constants.RENDER_STATISTICS,
 	        data: data
 	    };
 	}
-	
 	function renderVmstatistics(data) {
 	    return {
 	        type: _constants.RENDER_VMSTATISTICS,
 	        data: data
 	    };
 	}
-	
 	function renderPhysicscomputer(data) {
 	    return {
 	        type: _constants.RENDER_PHYSICSCOMPUTER,
 	        data: data
 	    };
 	}
-	
 	function renderVmcomputer(data) {
 	    return {
 	        type: _constants.RENDER_VMCOMPUTER,
 	        data: data
 	    };
 	}
-	
 	function renderVmlist(data) {
 	    return {
 	        type: _constants.RENDER_VMLIST,
 	        data: data
 	    };
 	}
-	
 	function renderAccordion(data) {
 	    return {
 	        type: _constants.RENDER_ACCORDION,
 	        data: data
 	    };
 	}
-	
 	function showSetting(data) {
 	    return {
 	        type: _constants.SHOW_SETTING,
 	        data: data
 	    };
 	}
-	
 	function changeStatisticsType(data) {
 	    return {
 	        type: _constants.CHANGE_STATISTICS_TYPE,
@@ -33583,26 +33566,24 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	/**
-	 * Created by Administrator on 2015/12/17.
-	 */
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
+	var _pluginEventTarget = __webpack_require__(224);
+	
+	var _pluginEventTarget2 = _interopRequireDefault(_pluginEventTarget);
+	
 	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { 'default': obj };
+	  return obj && obj.__esModule ? obj : { default: obj };
 	}
 	
-	var _libPluginEventTargetJs = __webpack_require__(224);
-	
-	var _libPluginEventTargetJs2 = _interopRequireDefault(_libPluginEventTargetJs);
-	
-	exports['default'] = new _libPluginEventTargetJs2['default']();
-	module.exports = exports['default'];
-	
+	exports.default = new _pluginEventTarget2.default(); /**
+	                                                      * Created by Administrator on 2015/12/17.
+	                                                      */
+
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "pageEvent.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
@@ -33656,8 +33637,7 @@
 	        }
 	    }
 	};
-	exports["default"] = EventTarget;
-	module.exports = exports["default"];
+	exports.default = EventTarget;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "plugin-eventTarget.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -35085,18 +35065,11 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	/**
-	 * Created by Administrator on 2015/11/13.
-	 */
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	
-	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { 'default': obj };
-	}
 	
 	var _react = __webpack_require__(18);
 	
@@ -35104,7 +35077,15 @@
 	
 	__webpack_require__(233);
 	
-	var Tabs = _react2['default'].createClass({
+	function _interopRequireDefault(obj) {
+	    return obj && obj.__esModule ? obj : { default: obj };
+	}
+	
+	/**
+	 * Created by Administrator on 2015/11/13.
+	 */
+	
+	var Tabs = _react2.default.createClass({
 	    displayName: 'Tabs',
 	
 	    tabClick: function tabClick(event) {
@@ -35125,17 +35106,16 @@
 	        for (var i in list) {
 	            var obj = list[i];
 	            if (i == 0) {
-	                items.push(_react2['default'].createElement('li', { className: 'tabs-title active', 'data-id': i, onClick: this.tabClick }, obj[this.props.dataMap.name]));
+	                items.push(_react2.default.createElement('li', { className: 'tabs-title active', 'data-id': i, onClick: this.tabClick }, obj[this.props.dataMap.name]));
 	            } else {
-	                items.push(_react2['default'].createElement('li', { className: 'tabs-title', 'data-id': i, onClick: this.tabClick }, obj[this.props.dataMap.name]));
+	                items.push(_react2.default.createElement('li', { className: 'tabs-title', 'data-id': i, onClick: this.tabClick }, obj[this.props.dataMap.name]));
 	            }
 	        }
-	        return _react2['default'].createElement('div', { className: 'tabs-panel' }, _react2['default'].createElement('ul', { className: 'gonabe-tabs-titles', ref: 'items' }, items, _react2['default'].createElement('li', { className: 'clearfix' })));
+	        return _react2.default.createElement('div', { className: 'tabs-panel' }, _react2.default.createElement('ul', { className: 'gonabe-tabs-titles', ref: 'items' }, items, _react2.default.createElement('li', { className: 'clearfix' })));
 	    }
 	});
 	
-	exports['default'] = Tabs;
-	module.exports = exports['default'];
+	exports.default = Tabs;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "gonabe_tabs.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -35185,18 +35165,11 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	/**
-	 * Created by Administrator on 2015/11/13.
-	 */
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	
-	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { 'default': obj };
-	}
 	
 	var _react = __webpack_require__(18);
 	
@@ -35204,7 +35177,15 @@
 	
 	__webpack_require__(236);
 	
-	var Tabs = _react2['default'].createClass({
+	function _interopRequireDefault(obj) {
+	    return obj && obj.__esModule ? obj : { default: obj };
+	}
+	
+	/**
+	 * Created by Administrator on 2015/11/13.
+	 */
+	
+	var Tabs = _react2.default.createClass({
 	    displayName: 'Tabs',
 	
 	    //    以下下为react生命周期方法
@@ -35235,15 +35216,14 @@
 	        this.setState({ list: nextProps.data });
 	    },
 	    render: function render() {
-	        var listDom = this.state.list.map((function (v, i) {
-	            return _react2['default'].createElement('div', { className: 'accordion-item' }, _react2['default'].createElement('div', { className: 'accordion-item-title', 'data-id': i, onClick: this.changeStatus }, v.title, _react2['default'].createElement('div', { className: "accordion-item-title-" + v.status })), _react2['default'].createElement('div', { className: 'accordion-item-content', style: { display: v.status == "add" ? "none" : "block" } }, v.content, _react2['default'].createElement('div', { className: 'clearfix' })));
-	        }).bind(this));
-	        return _react2['default'].createElement('div', { className: 'accordion-panel' }, listDom);
+	        var listDom = this.state.list.map(function (v, i) {
+	            return _react2.default.createElement('div', { className: 'accordion-item' }, _react2.default.createElement('div', { className: 'accordion-item-title', 'data-id': i, onClick: this.changeStatus }, v.title, _react2.default.createElement('div', { className: "accordion-item-title-" + v.status })), _react2.default.createElement('div', { className: 'accordion-item-content', style: { display: v.status == "add" ? "none" : "block" } }, v.content, _react2.default.createElement('div', { className: 'clearfix' })));
+	        }.bind(this));
+	        return _react2.default.createElement('div', { className: 'accordion-panel' }, listDom);
 	    }
 	});
 	
-	exports['default'] = Tabs;
-	module.exports = exports['default'];
+	exports.default = Tabs;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "gonabe_accordion.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -35293,9 +35273,49 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	/**
-	 * Created by 束蓬 on 2015/9/7.
-	 */
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _jquery = __webpack_require__(212);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	var _react = __webpack_require__(18);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _computerList = __webpack_require__(239);
+	
+	var _computerList2 = _interopRequireDefault(_computerList);
+	
+	function _interopRequireDefault(obj) {
+	    return obj && obj.__esModule ? obj : { default: obj };
+	}
+	
+	var StatisticsList = _react2.default.createClass({
+	    displayName: 'StatisticsList',
+	
+	    changeStatus: function changeStatus(event) {
+	        (0, _jquery2.default)(event.currentTarget).find("input").trigger("click");
+	    },
+	    /***
+	     * 自定义属性以及方法
+	     */
+	    componentDidMount: function componentDidMount() {
+	        (0, _jquery2.default)(document).on("click", "input[type='checkbox']", function (e) {
+	            this.props.doSomething();
+	        }.bind(this));
+	    },
+	    render: function render() {
+	        var data = this.props.listData;
+	        return _react2.default.createElement('div', null, _react2.default.createElement('div', { className: 'filter-1' }, _react2.default.createElement('div', { className: 'text' }, '主机状态：'), _react2.default.createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2.default.createElement('input', { className: 'crStatus', 'data-status': '0', type: 'checkbox' }), _react2.default.createElement('img', { src: __webpack_require__(254), width: '30', height: '30' }), _react2.default.createElement('span', { className: 'color1' }, '负载正常（' + data[0] + '）'), _react2.default.createElement('div', { className: 'triangle1' }), _react2.default.createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2.default.createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2.default.createElement('input', { className: 'crStatus', 'data-status': '2', type: 'checkbox' }), _react2.default.createElement('img', { src: __webpack_require__(256), width: '30', height: '30' }), _react2.default.createElement('span', { className: 'color2' }, '负载偏高（' + data[2] + '）'), _react2.default.createElement('div', { className: 'triangle2' }), _react2.default.createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2.default.createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2.default.createElement('input', { className: 'crStatus', 'data-status': '3', type: 'checkbox' }), _react2.default.createElement('img', { src: __webpack_require__(257), width: '30', height: '30' }), _react2.default.createElement('span', { className: 'color4' }, '负载告警（' + data[3] + '）'), _react2.default.createElement('div', { className: 'triangle4' }), _react2.default.createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2.default.createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2.default.createElement('input', { className: 'crStatus', 'data-status': '1', type: 'checkbox' }), _react2.default.createElement('img', { src: __webpack_require__(258), width: '30', height: '30' }), _react2.default.createElement('span', { className: 'color3' }, '主机下线（' + data[1] + '）'), _react2.default.createElement('div', { className: 'triangle3' }), _react2.default.createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2.default.createElement('div', { className: 'clearfix' })), _react2.default.createElement('div', { className: 'filter-2' }, _react2.default.createElement('div', { className: 'text' }, '部署状态：'), _react2.default.createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2.default.createElement('input', { className: 'vmNum', 'data-status': '10', type: 'checkbox' }), _react2.default.createElement('img', { src: __webpack_require__(259), width: '30', height: '30' }), _react2.default.createElement('span', { className: 'color7' }, '已部署虚拟主机（' + data[10] + '）'), _react2.default.createElement('div', { className: 'triangle7' }), _react2.default.createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2.default.createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2.default.createElement('input', { className: 'vmNum', 'data-status': '11', type: 'checkbox' }), _react2.default.createElement('img', { src: __webpack_require__(260), width: '30', height: '30' }), _react2.default.createElement('span', { className: 'color8' }, '未部署虚拟主机（' + data[11] + '）'), _react2.default.createElement('div', { className: 'triangle8' }), _react2.default.createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2.default.createElement('div', { className: 'clearfix' })), _react2.default.createElement('div', { className: 'filter-3' }, _react2.default.createElement('div', { className: 'text' }, '分配状态：'), _react2.default.createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2.default.createElement('input', { className: 'usrId', 'data-status': '20', type: 'checkbox' }), _react2.default.createElement('img', { src: __webpack_require__(261), width: '30', height: '30' }), _react2.default.createElement('span', { className: 'color9' }, '可分配物理主机（' + data[20] + '）'), _react2.default.createElement('div', { className: 'triangle9' }), _react2.default.createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2.default.createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2.default.createElement('input', { className: 'usrId', 'data-status': '21', type: 'checkbox' }), _react2.default.createElement('img', { src: __webpack_require__(262), width: '30', height: '30' }), _react2.default.createElement('span', { className: 'color10' }, '已分配物理主机（' + data[21] + '）'), _react2.default.createElement('div', { className: 'triangle10' }), _react2.default.createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2.default.createElement('div', { className: 'clearfix' })));
+	    }
+	}); /**
+	     * Created by 束蓬 on 2015/9/7.
+	     */
 	/**故障暂时去掉
 	 <div className="checkbox" onClick={this.changeStatus}>
 	 <input className="crStatus" data-status="4" type="checkbox"/>
@@ -35305,49 +35325,8 @@
 	 <img src={require("../imgs/new/tick.png")} className="tick-icon"/>
 	 </div>
 	 */
-	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	
-	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { 'default': obj };
-	}
-	
-	var _jquery = __webpack_require__(212);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	var _react = __webpack_require__(18);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _computerListJs = __webpack_require__(239);
-	
-	var _computerListJs2 = _interopRequireDefault(_computerListJs);
-	
-	var StatisticsList = _react2['default'].createClass({
-	    displayName: 'StatisticsList',
-	
-	    changeStatus: function changeStatus(event) {
-	        (0, _jquery2['default'])(event.currentTarget).find("input").trigger("click");
-	    },
-	    /***
-	     * 自定义属性以及方法
-	     */
-	    componentDidMount: function componentDidMount() {
-	        (0, _jquery2['default'])(document).on("click", "input[type='checkbox']", (function (e) {
-	            this.props.doSomething();
-	        }).bind(this));
-	    },
-	    render: function render() {
-	        var data = this.props.listData;
-	        return _react2['default'].createElement('div', null, _react2['default'].createElement('div', { className: 'filter-1' }, _react2['default'].createElement('div', { className: 'text' }, '主机状态：'), _react2['default'].createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2['default'].createElement('input', { className: 'crStatus', 'data-status': '0', type: 'checkbox' }), _react2['default'].createElement('img', { src: __webpack_require__(254), width: '30', height: '30' }), _react2['default'].createElement('span', { className: 'color1' }, '负载正常（' + data[0] + '）'), _react2['default'].createElement('div', { className: 'triangle1' }), _react2['default'].createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2['default'].createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2['default'].createElement('input', { className: 'crStatus', 'data-status': '2', type: 'checkbox' }), _react2['default'].createElement('img', { src: __webpack_require__(256), width: '30', height: '30' }), _react2['default'].createElement('span', { className: 'color2' }, '负载偏高（' + data[2] + '）'), _react2['default'].createElement('div', { className: 'triangle2' }), _react2['default'].createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2['default'].createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2['default'].createElement('input', { className: 'crStatus', 'data-status': '3', type: 'checkbox' }), _react2['default'].createElement('img', { src: __webpack_require__(257), width: '30', height: '30' }), _react2['default'].createElement('span', { className: 'color4' }, '负载告警（' + data[3] + '）'), _react2['default'].createElement('div', { className: 'triangle4' }), _react2['default'].createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2['default'].createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2['default'].createElement('input', { className: 'crStatus', 'data-status': '1', type: 'checkbox' }), _react2['default'].createElement('img', { src: __webpack_require__(258), width: '30', height: '30' }), _react2['default'].createElement('span', { className: 'color3' }, '主机下线（' + data[1] + '）'), _react2['default'].createElement('div', { className: 'triangle3' }), _react2['default'].createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2['default'].createElement('div', { className: 'clearfix' })), _react2['default'].createElement('div', { className: 'filter-2' }, _react2['default'].createElement('div', { className: 'text' }, '部署状态：'), _react2['default'].createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2['default'].createElement('input', { className: 'vmNum', 'data-status': '10', type: 'checkbox' }), _react2['default'].createElement('img', { src: __webpack_require__(259), width: '30', height: '30' }), _react2['default'].createElement('span', { className: 'color7' }, '已部署虚拟主机（' + data[10] + '）'), _react2['default'].createElement('div', { className: 'triangle7' }), _react2['default'].createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2['default'].createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2['default'].createElement('input', { className: 'vmNum', 'data-status': '11', type: 'checkbox' }), _react2['default'].createElement('img', { src: __webpack_require__(260), width: '30', height: '30' }), _react2['default'].createElement('span', { className: 'color8' }, '未部署虚拟主机（' + data[11] + '）'), _react2['default'].createElement('div', { className: 'triangle8' }), _react2['default'].createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2['default'].createElement('div', { className: 'clearfix' })), _react2['default'].createElement('div', { className: 'filter-3' }, _react2['default'].createElement('div', { className: 'text' }, '分配状态：'), _react2['default'].createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2['default'].createElement('input', { className: 'usrId', 'data-status': '20', type: 'checkbox' }), _react2['default'].createElement('img', { src: __webpack_require__(261), width: '30', height: '30' }), _react2['default'].createElement('span', { className: 'color9' }, '可分配物理主机（' + data[20] + '）'), _react2['default'].createElement('div', { className: 'triangle9' }), _react2['default'].createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2['default'].createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2['default'].createElement('input', { className: 'usrId', 'data-status': '21', type: 'checkbox' }), _react2['default'].createElement('img', { src: __webpack_require__(262), width: '30', height: '30' }), _react2['default'].createElement('span', { className: 'color10' }, '已分配物理主机（' + data[21] + '）'), _react2['default'].createElement('div', { className: 'triangle10' }), _react2['default'].createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2['default'].createElement('div', { className: 'clearfix' })));
-	    }
-	});
-	exports['default'] = StatisticsList;
-	module.exports = exports['default'];
+	exports.default = StatisticsList;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "statisticsList.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -35357,18 +35336,11 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	/**
-	 * Created by 束蓬 on 2015/9/7.
-	 */
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	
-	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { 'default': obj };
-	}
 	
 	var _jquery = __webpack_require__(212);
 	
@@ -35378,38 +35350,42 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _filterDataJs = __webpack_require__(240);
+	var _filterData = __webpack_require__(240);
 	
-	var _filterDataJs2 = _interopRequireDefault(_filterDataJs);
+	var _filterData2 = _interopRequireDefault(_filterData);
 	
-	var ComputerList = _react2['default'].createClass({
+	function _interopRequireDefault(obj) {
+	    return obj && obj.__esModule ? obj : { default: obj };
+	}
+	
+	var ComputerList = _react2.default.createClass({
 	    displayName: 'ComputerList',
 	
 	    /***
 	     * 自定义属性以及方法
 	     */
 	    itemsClick: function itemsClick(e) {
-	        (0, _jquery2['default'])(".item").removeClass("active");
-	        (0, _jquery2['default'])(e.currentTarget).parents(".item").addClass("active");
-	        var id = (0, _jquery2['default'])(e.currentTarget).attr("data-id");
-	        var name = (0, _jquery2['default'])(e.currentTarget).attr("data-name");
+	        (0, _jquery2.default)(".item").removeClass("active");
+	        (0, _jquery2.default)(e.currentTarget).parents(".item").addClass("active");
+	        var id = (0, _jquery2.default)(e.currentTarget).attr("data-id");
+	        var name = (0, _jquery2.default)(e.currentTarget).attr("data-name");
 	        this.props.showVmList(id, name);
 	    },
 	    detailInfo: function detailInfo(e) {
 	        debugger;
-	        var info = (0, _jquery2['default'])(e.currentTarget).data("info");
+	        var info = (0, _jquery2.default)(e.currentTarget).data("info");
 	        var CRID = info.crId;
 	        //初始化弹出框，返回一个jquery对象
-	        _jquery2['default'].ajax({
+	        _jquery2.default.ajax({
 	            url: '/dbp/service/infra/getVCRListInfoByPhyCRID/' + CRID,
 	            type: 'get',
 	            success: function success(value) {
-	                var win = _jquery2['default'].window({ id: "physicDetailMsg", title: "物理机详情", close: true, width: 750, height: 300 });
+	                var win = _jquery2.default.window({ id: "physicDetailMsg", title: "物理机详情", close: true, width: 750, height: 300 });
 	                //console.log(require("../../ejs/physicDetailMsgWin.ejs")({vmLists:JSON.parse(value),info:info}))
 	                win.empty().append(__webpack_require__(241)({ vmLists: JSON.parse(value), info: info, status: ["正常", "离线", "偏高", "告警", "故障", "新入网"] }));
 	            },
 	            error: function error(value) {
-	                var win = _jquery2['default'].window({ id: "physicDetailMsg", title: "物理机详情", close: true, width: 750, height: 300 });
+	                var win = _jquery2.default.window({ id: "physicDetailMsg", title: "物理机详情", close: true, width: 750, height: 300 });
 	                //console.log(require("../../ejs/physicDetailMsgWin.ejs")({vmLists:JSON.parse(value),info:info}))
 	                debugger;
 	                win.empty().append(__webpack_require__(241)({ vmLists: __webpack_require__(231), info: info, status: ["正常", "离线", "偏高", "告警", "故障", "新入网"] }));
@@ -35419,7 +35395,7 @@
 	    filters: {
 	        areaId: ""
 	    },
-	    fiterDatas: _filterDataJs2['default'],
+	    fiterDatas: _filterData2.default,
 	    transformData: function transformData(data, num) {
 	        if (typeof data === "number" && !isNaN(data)) {
 	            if (data / 1000 > 1) {
@@ -35436,29 +35412,30 @@
 	     */
 	    render: function render() {
 	        var data = this.fiterDatas(this.props.listData);
-	        var items = data.map((function (v, i) {
+	        var items = data.map(function (v, i) {
 	            var comMonitorInfo = v.comMonitorInfo || { cpu_USAGE: 0, mem_USAGE: 0, disk_USAGE: 0 };
 	            var vmIcon = '';
 	            var usrIcon = '';
 	            if (v.vmNum) {
-	                vmIcon = _react2['default'].createElement('div', { className: 'deployed' }, _react2['default'].createElement('img', { className: 'cz', src: __webpack_require__(242), onClick: this.itemsClick, 'data-id': v.crId, 'data-name': v.crName }), _react2['default'].createElement('img', { src: __webpack_require__(243) }));
+	                vmIcon = _react2.default.createElement('div', { className: 'deployed' }, _react2.default.createElement('img', { className: 'cz', src: __webpack_require__(242), onClick: this.itemsClick, 'data-id': v.crId, 'data-name': v.crName }), _react2.default.createElement('img', { src: __webpack_require__(243) }));
 	            } else {
 	                if (v.usrId == "0") {
-	                    usrIcon = _react2['default'].createElement('img', { className: 'usr-1', src: __webpack_require__(244) });
+	                    usrIcon = _react2.default.createElement('img', { className: 'usr-1', src: __webpack_require__(244) });
 	                } else if (v.usrId == "9999") {
-	                    usrIcon = _react2['default'].createElement('img', { className: 'usr-3', src: __webpack_require__(245) });
+	                    usrIcon = _react2.default.createElement('img', { className: 'usr-3', src: __webpack_require__(245) });
 	                } else {
-	                    usrIcon = _react2['default'].createElement('img', { className: 'usr-2', src: __webpack_require__(246) });
+	                    usrIcon = _react2.default.createElement('img', { className: 'usr-2', src: __webpack_require__(246) });
 	                }
 	            }
-	            return _react2['default'].createElement('div', { className: 'item', key: v.crId, 'data-info': JSON.stringify(v), onClick: this.detailInfo }, _react2['default'].createElement('table', { border: '0' }, _react2['default'].createElement('tbody', null, _react2['default'].createElement('tr', null, _react2['default'].createElement('td', null, _react2['default'].createElement('p', { className: 'Img' }, _react2['default'].createElement('img', { src: __webpack_require__(247)("./status-" + v.comMonitorInfo.showStatus + "-big.png"), width: '40', height: '40' }))), _react2['default'].createElement('td', null, _react2['default'].createElement('span', { className: 'Name' }, v.crName), _react2['default'].createElement('br', null), v.ip), _react2['default'].createElement('td', null)), _react2['default'].createElement('tr', { style: { height: 15 } }, _react2['default'].createElement('td', { style: { textAlign: 'center' } }, 'cpu'), _react2['default'].createElement('td', null, _react2['default'].createElement('div', { className: 'progress progress-striped', style: { height: 15, width: 140, margin: "15px 0px", borderRadius: 0 } }, _react2['default'].createElement('div', { style: { minWidth: '10%', width: comMonitorInfo.cpuallusage + '%', display: comMonitorInfo.cpuallusage ? 'block' : 'none' }, className: 'bar' }, _react2['default'].createElement('span', { className: 'percent', style: { fontSize: '5px', color: 'white' } }, comMonitorInfo.cpuallusage + '%')))), _react2['default'].createElement('td', null)), _react2['default'].createElement('tr', null, _react2['default'].createElement('td', { style: { verticalAlign: 'top', textAlign: 'center' } }, '内存'), _react2['default'].createElement('td', null, _react2['default'].createElement('div', { className: 'progress progress-striped', style: { height: 15, width: 140, marginBottom: 15, borderRadius: 0 } }, _react2['default'].createElement('div', { style: { minWidth: '10%', width: comMonitorInfo.memusage + '%', display: comMonitorInfo.memusage ? 'block' : 'none' }, className: 'bar' }, _react2['default'].createElement('span', { className: 'percent', style: { fontSize: '5px', color: 'white' } }, comMonitorInfo.memusage + '%')))), _react2['default'].createElement('td', { style: { verticalAlign: 'top' } }, this.transformData(v.memorySize * comMonitorInfo.memusage / 100, 4), '/', this.transformData(v.memorySize, 4))), _react2['default'].createElement('tr', null, _react2['default'].createElement('td', { style: { verticalAlign: 'top', textAlign: 'center' } }, '硬盘'), _react2['default'].createElement('td', null, _react2['default'].createElement('div', { className: 'progress progress-striped', style: { height: 15, width: 140, borderRadius: 0 } }, _react2['default'].createElement('div', { style: { minWidth: '10%', width: comMonitorInfo.diskusage + '%', display: comMonitorInfo.diskusage ? 'block' : 'none' }, className: 'bar' }, _react2['default'].createElement('span', { className: 'percent', style: { fontSize: '5px', color: 'white' } }, comMonitorInfo.diskusage + "%")))), _react2['default'].createElement('td', { style: { verticalAlign: 'top' } }, this.transformData(comMonitorInfo.diskusedsize, 4), '/', this.transformData(v.diskSize, 4))))), vmIcon, usrIcon);
-	        }).bind(this));
-	        return _react2['default'].createElement('div', null, items);
+	            return _react2.default.createElement('div', { className: 'item', key: v.crId, 'data-info': JSON.stringify(v), onClick: this.detailInfo }, _react2.default.createElement('table', { border: '0' }, _react2.default.createElement('tbody', null, _react2.default.createElement('tr', null, _react2.default.createElement('td', null, _react2.default.createElement('p', { className: 'Img' }, _react2.default.createElement('img', { src: __webpack_require__(247)("./status-" + v.comMonitorInfo.showStatus + "-big.png"), width: '40', height: '40' }))), _react2.default.createElement('td', null, _react2.default.createElement('span', { className: 'Name' }, v.crName), _react2.default.createElement('br', null), v.ip), _react2.default.createElement('td', null)), _react2.default.createElement('tr', { style: { height: 15 } }, _react2.default.createElement('td', { style: { textAlign: 'center' } }, 'cpu'), _react2.default.createElement('td', null, _react2.default.createElement('div', { className: 'progress progress-striped', style: { height: 15, width: 140, margin: "15px 0px", borderRadius: 0 } }, _react2.default.createElement('div', { style: { minWidth: '10%', width: comMonitorInfo.cpuallusage + '%', display: comMonitorInfo.cpuallusage ? 'block' : 'none' }, className: 'bar' }, _react2.default.createElement('span', { className: 'percent', style: { fontSize: '5px', color: 'white' } }, comMonitorInfo.cpuallusage + '%')))), _react2.default.createElement('td', null)), _react2.default.createElement('tr', null, _react2.default.createElement('td', { style: { verticalAlign: 'top', textAlign: 'center' } }, '内存'), _react2.default.createElement('td', null, _react2.default.createElement('div', { className: 'progress progress-striped', style: { height: 15, width: 140, marginBottom: 15, borderRadius: 0 } }, _react2.default.createElement('div', { style: { minWidth: '10%', width: comMonitorInfo.memusage + '%', display: comMonitorInfo.memusage ? 'block' : 'none' }, className: 'bar' }, _react2.default.createElement('span', { className: 'percent', style: { fontSize: '5px', color: 'white' } }, comMonitorInfo.memusage + '%')))), _react2.default.createElement('td', { style: { verticalAlign: 'top' } }, this.transformData(v.memorySize * comMonitorInfo.memusage / 100, 4), '/', this.transformData(v.memorySize, 4))), _react2.default.createElement('tr', null, _react2.default.createElement('td', { style: { verticalAlign: 'top', textAlign: 'center' } }, '硬盘'), _react2.default.createElement('td', null, _react2.default.createElement('div', { className: 'progress progress-striped', style: { height: 15, width: 140, borderRadius: 0 } }, _react2.default.createElement('div', { style: { minWidth: '10%', width: comMonitorInfo.diskusage + '%', display: comMonitorInfo.diskusage ? 'block' : 'none' }, className: 'bar' }, _react2.default.createElement('span', { className: 'percent', style: { fontSize: '5px', color: 'white' } }, comMonitorInfo.diskusage + "%")))), _react2.default.createElement('td', { style: { verticalAlign: 'top' } }, this.transformData(comMonitorInfo.diskusedsize, 4), '/', this.transformData(v.diskSize, 4))))), vmIcon, usrIcon);
+	        }.bind(this));
+	        return _react2.default.createElement('div', null, items);
 	    }
-	});
+	}); /**
+	     * Created by 束蓬 on 2015/9/7.
+	     */
 	
-	exports['default'] = ComputerList;
-	module.exports = exports['default'];
+	exports.default = ComputerList;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "computerList.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -35468,36 +35445,25 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	/**
-	 * Created by Administrator on 2015/12/2.
-	 */
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 	
-	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { "default": obj };
-	}
-	
-	var _jquery = __webpack_require__(212);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	exports["default"] = function (data) {
+	exports.default = function (data) {
 	    var filters = this.filters;
 	    filters.crStatus = [];
 	    filters.vmNum = [];
 	    filters.usrId = [];
-	    (0, _jquery2["default"])(".crStatus:checked").each(function (i, v) {
-	        filters.crStatus.push((0, _jquery2["default"])(this).data("status"));
+	    (0, _jquery2.default)(".crStatus:checked").each(function (i, v) {
+	        filters.crStatus.push((0, _jquery2.default)(this).data("status"));
 	    });
-	    (0, _jquery2["default"])(".vmNum:checked").each(function (i, v) {
-	        filters.vmNum.push((0, _jquery2["default"])(this).data("status"));
+	    (0, _jquery2.default)(".vmNum:checked").each(function (i, v) {
+	        filters.vmNum.push((0, _jquery2.default)(this).data("status"));
 	    });
-	    (0, _jquery2["default"])(".usrId:checked").each(function (i, v) {
-	        filters.usrId.push((0, _jquery2["default"])(this).data("status"));
+	    (0, _jquery2.default)(".usrId:checked").each(function (i, v) {
+	        filters.usrId.push((0, _jquery2.default)(this).data("status"));
 	    });
 	    if (filters.crStatus.length) {
 	        data = data.filter(function (v, i) {
@@ -35588,8 +35554,14 @@
 	    return data;
 	};
 	
-	module.exports = exports["default"];
+	var _jquery = __webpack_require__(212);
 	
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) {
+	    return obj && obj.__esModule ? obj : { default: obj };
+	}
+
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "filterData.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
@@ -35823,27 +35795,11 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	/**
-	 * Created by 束蓬 on 2015/9/7.
-	 */
-	/**故障暂时去掉
-	 <div className="checkbox" onClick={this.changeStatus}>
-	 <input className="crStatus" data-status="4" type="checkbox"/>
-	 <img src={require("../imgs/new/status-4.png")} width="30" height="30" />
-	 <span className="color5">{'主机故障（'+data[4]+'）'}</span>
-	 <div className="triangle5"></div>
-	 <img src={require("../imgs/new/tick.png")} className="tick-icon"/>
-	 </div>
-	 */
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	
-	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { 'default': obj };
-	}
 	
 	var _jquery = __webpack_require__(212);
 	
@@ -35853,31 +35809,46 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _computerListJs = __webpack_require__(239);
+	var _computerList = __webpack_require__(239);
 	
-	var _computerListJs2 = _interopRequireDefault(_computerListJs);
+	var _computerList2 = _interopRequireDefault(_computerList);
 	
-	var StatisticsList = _react2['default'].createClass({
+	function _interopRequireDefault(obj) {
+	    return obj && obj.__esModule ? obj : { default: obj };
+	}
+	
+	var StatisticsList = _react2.default.createClass({
 	    displayName: 'StatisticsList',
 	
 	    changeStatus: function changeStatus(event) {
-	        (0, _jquery2['default'])(event.currentTarget).find("input").trigger("click");
+	        (0, _jquery2.default)(event.currentTarget).find("input").trigger("click");
 	    },
 	    /***
 	     * 自定义属性以及方法
 	     */
 	    componentDidMount: function componentDidMount() {
-	        (0, _jquery2['default'])(document).on("click", "input[type='checkbox']", (function (e) {
+	        (0, _jquery2.default)(document).on("click", "input[type='checkbox']", function (e) {
 	            this.props.doSomething();
-	        }).bind(this));
+	        }.bind(this));
 	    },
 	    render: function render() {
 	        var data = this.props.listData;
-	        return _react2['default'].createElement('div', null, _react2['default'].createElement('div', { className: 'filter-1' }, _react2['default'].createElement('div', { className: 'text' }, '主机状态：'), _react2['default'].createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2['default'].createElement('input', { className: 'crStatus', 'data-status': '0', type: 'checkbox' }), _react2['default'].createElement('img', { src: __webpack_require__(254), width: '30', height: '30' }), _react2['default'].createElement('span', { className: 'color1' }, '负载正常（' + data[0] + '）'), _react2['default'].createElement('div', { className: 'triangle1' }), _react2['default'].createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2['default'].createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2['default'].createElement('input', { className: 'crStatus', 'data-status': '2', type: 'checkbox' }), _react2['default'].createElement('img', { src: __webpack_require__(256), width: '30', height: '30' }), _react2['default'].createElement('span', { className: 'color2' }, '负载偏高（' + data[2] + '）'), _react2['default'].createElement('div', { className: 'triangle2' }), _react2['default'].createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2['default'].createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2['default'].createElement('input', { className: 'crStatus', 'data-status': '3', type: 'checkbox' }), _react2['default'].createElement('img', { src: __webpack_require__(257), width: '30', height: '30' }), _react2['default'].createElement('span', { className: 'color4' }, '负载告警（' + data[3] + '）'), _react2['default'].createElement('div', { className: 'triangle4' }), _react2['default'].createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2['default'].createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2['default'].createElement('input', { className: 'crStatus', 'data-status': '1', type: 'checkbox' }), _react2['default'].createElement('img', { src: __webpack_require__(258), width: '30', height: '30' }), _react2['default'].createElement('span', { className: 'color3' }, '主机下线（' + data[1] + '）'), _react2['default'].createElement('div', { className: 'triangle3' }), _react2['default'].createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2['default'].createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2['default'].createElement('input', { className: 'crStatus', 'data-status': '5', type: 'checkbox' }), _react2['default'].createElement('img', { src: __webpack_require__(264), width: '30', height: '30' }), _react2['default'].createElement('span', { className: 'color6' }, '新入网主机（' + data[5] + '）'), _react2['default'].createElement('div', { className: 'triangle6' }), _react2['default'].createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2['default'].createElement('div', { className: 'clearfix' })), _react2['default'].createElement('div', { className: 'filter-3' }, _react2['default'].createElement('div', { className: 'text' }, '分配状态：'), _react2['default'].createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2['default'].createElement('input', { className: 'usrId', 'data-status': '20', type: 'checkbox' }), _react2['default'].createElement('img', { src: __webpack_require__(261), width: '30', height: '30' }), _react2['default'].createElement('span', { className: 'color9' }, '可分配虚拟主机（' + data[20] + '）'), _react2['default'].createElement('div', { className: 'triangle9' }), _react2['default'].createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2['default'].createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2['default'].createElement('input', { className: 'usrId', 'data-status': '21', type: 'checkbox' }), _react2['default'].createElement('img', { src: __webpack_require__(262), width: '30', height: '30' }), _react2['default'].createElement('span', { className: 'color10' }, '已分配虚拟主机（' + data[21] + '）'), _react2['default'].createElement('div', { className: 'triangle10' }), _react2['default'].createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2['default'].createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2['default'].createElement('input', { className: 'usrId', 'data-status': '22', type: 'checkbox' }), _react2['default'].createElement('img', { src: __webpack_require__(265), width: '30', height: '30' }), _react2['default'].createElement('span', { className: 'color11' }, '待回收虚拟主机（' + data[22] + '）'), _react2['default'].createElement('div', { className: 'triangle11' }), _react2['default'].createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2['default'].createElement('div', { className: 'clearfix' })));
+	        return _react2.default.createElement('div', null, _react2.default.createElement('div', { className: 'filter-1' }, _react2.default.createElement('div', { className: 'text' }, '主机状态：'), _react2.default.createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2.default.createElement('input', { className: 'crStatus', 'data-status': '0', type: 'checkbox' }), _react2.default.createElement('img', { src: __webpack_require__(254), width: '30', height: '30' }), _react2.default.createElement('span', { className: 'color1' }, '负载正常（' + data[0] + '）'), _react2.default.createElement('div', { className: 'triangle1' }), _react2.default.createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2.default.createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2.default.createElement('input', { className: 'crStatus', 'data-status': '2', type: 'checkbox' }), _react2.default.createElement('img', { src: __webpack_require__(256), width: '30', height: '30' }), _react2.default.createElement('span', { className: 'color2' }, '负载偏高（' + data[2] + '）'), _react2.default.createElement('div', { className: 'triangle2' }), _react2.default.createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2.default.createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2.default.createElement('input', { className: 'crStatus', 'data-status': '3', type: 'checkbox' }), _react2.default.createElement('img', { src: __webpack_require__(257), width: '30', height: '30' }), _react2.default.createElement('span', { className: 'color4' }, '负载告警（' + data[3] + '）'), _react2.default.createElement('div', { className: 'triangle4' }), _react2.default.createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2.default.createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2.default.createElement('input', { className: 'crStatus', 'data-status': '1', type: 'checkbox' }), _react2.default.createElement('img', { src: __webpack_require__(258), width: '30', height: '30' }), _react2.default.createElement('span', { className: 'color3' }, '主机下线（' + data[1] + '）'), _react2.default.createElement('div', { className: 'triangle3' }), _react2.default.createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2.default.createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2.default.createElement('input', { className: 'crStatus', 'data-status': '5', type: 'checkbox' }), _react2.default.createElement('img', { src: __webpack_require__(264), width: '30', height: '30' }), _react2.default.createElement('span', { className: 'color6' }, '新入网主机（' + data[5] + '）'), _react2.default.createElement('div', { className: 'triangle6' }), _react2.default.createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2.default.createElement('div', { className: 'clearfix' })), _react2.default.createElement('div', { className: 'filter-3' }, _react2.default.createElement('div', { className: 'text' }, '分配状态：'), _react2.default.createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2.default.createElement('input', { className: 'usrId', 'data-status': '20', type: 'checkbox' }), _react2.default.createElement('img', { src: __webpack_require__(261), width: '30', height: '30' }), _react2.default.createElement('span', { className: 'color9' }, '可分配虚拟主机（' + data[20] + '）'), _react2.default.createElement('div', { className: 'triangle9' }), _react2.default.createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2.default.createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2.default.createElement('input', { className: 'usrId', 'data-status': '21', type: 'checkbox' }), _react2.default.createElement('img', { src: __webpack_require__(262), width: '30', height: '30' }), _react2.default.createElement('span', { className: 'color10' }, '已分配虚拟主机（' + data[21] + '）'), _react2.default.createElement('div', { className: 'triangle10' }), _react2.default.createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2.default.createElement('div', { className: 'checkbox', onClick: this.changeStatus }, _react2.default.createElement('input', { className: 'usrId', 'data-status': '22', type: 'checkbox' }), _react2.default.createElement('img', { src: __webpack_require__(265), width: '30', height: '30' }), _react2.default.createElement('span', { className: 'color11' }, '待回收虚拟主机（' + data[22] + '）'), _react2.default.createElement('div', { className: 'triangle11' }), _react2.default.createElement('img', { src: __webpack_require__(255), className: 'tick-icon' })), _react2.default.createElement('div', { className: 'clearfix' })));
 	    }
-	});
-	exports['default'] = StatisticsList;
-	module.exports = exports['default'];
+	}); /**
+	     * Created by 束蓬 on 2015/9/7.
+	     */
+	/**故障暂时去掉
+	 <div className="checkbox" onClick={this.changeStatus}>
+	 <input className="crStatus" data-status="4" type="checkbox"/>
+	 <img src={require("../imgs/new/status-4.png")} width="30" height="30" />
+	 <span className="color5">{'主机故障（'+data[4]+'）'}</span>
+	 <div className="triangle5"></div>
+	 <img src={require("../imgs/new/tick.png")} className="tick-icon"/>
+	 </div>
+	 */
+	
+	exports.default = StatisticsList;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "vmStatisticsList.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -35899,18 +35870,11 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	/**
-	 * Created by 束蓬 on 2015/9/7.
-	 */
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	
-	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { 'default': obj };
-	}
 	
 	__webpack_require__(267);
 	
@@ -35924,54 +35888,58 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _filterDataJs = __webpack_require__(240);
+	var _filterData = __webpack_require__(240);
 	
-	var _filterDataJs2 = _interopRequireDefault(_filterDataJs);
+	var _filterData2 = _interopRequireDefault(_filterData);
 	
-	var ComputerList = _react2['default'].createClass({
+	function _interopRequireDefault(obj) {
+	    return obj && obj.__esModule ? obj : { default: obj };
+	}
+	
+	var ComputerList = _react2.default.createClass({
 	    displayName: 'ComputerList',
 	
 	    /***
 	     * 自定义属性以及方法
 	     */
 	    itemsClick: function itemsClick(e) {
-	        (0, _jquery2['default'])(".item").removeClass("active");
-	        (0, _jquery2['default'])(e.currentTarget).parents(".item").addClass("active");
-	        var id = (0, _jquery2['default'])(e.currentTarget).attr("data-id");
-	        var name = (0, _jquery2['default'])(e.currentTarget).attr("data-name");
+	        (0, _jquery2.default)(".item").removeClass("active");
+	        (0, _jquery2.default)(e.currentTarget).parents(".item").addClass("active");
+	        var id = (0, _jquery2.default)(e.currentTarget).attr("data-id");
+	        var name = (0, _jquery2.default)(e.currentTarget).attr("data-name");
 	        this.props.showVmList(id, name);
 	    },
 	    filters: {
 	        areaId: ""
 	    },
-	    fiterDatas: _filterDataJs2['default'],
+	    fiterDatas: _filterData2.default,
 	    operation: function operation(e) {
-	        var id = (0, _jquery2['default'])(e.currentTarget).data("index") + "";
+	        var id = (0, _jquery2.default)(e.currentTarget).data("index") + "";
 	        debugger;
 	        switch (id) {
 	            case "0":
 	                break;
 	            case "4":
-	                _jquery2['default'].get((0, _jquery2['default'])(e.currentTarget).data("url"), function (value) {
+	                _jquery2.default.get((0, _jquery2.default)(e.currentTarget).data("url"), function (value) {
 	                    var data = JSON.parse(value);
 	                    window.open(data.console.url, "_blank");
 	                });
 	                break;
 	            case "5":
-	                var CRID = (0, _jquery2['default'])(e.currentTarget).data("id");
-	                _jquery2['default'].loading(true);
-	                var ipListPromise = _jquery2['default'].ajax({
+	                var CRID = (0, _jquery2.default)(e.currentTarget).data("id");
+	                _jquery2.default.loading(true);
+	                var ipListPromise = _jquery2.default.ajax({
 	                    url: "/dbp/service/infra/getUseableIPList",
 	                    type: 'get'
 	                });
-	                var VCRIPSPromise = _jquery2['default'].ajax({
+	                var VCRIPSPromise = _jquery2.default.ajax({
 	                    url: "/dbp/service/infra/getVCRIPs/" + CRID,
 	                    type: 'get'
 	                });
 	                ipListPromise.done(function (ipList) {
 	                    VCRIPSPromise.then(function (VCRIPS) {
-	                        _jquery2['default'].loading(false);
-	                        var content = _jquery2['default'].window({
+	                        _jquery2.default.loading(false);
+	                        var content = _jquery2.default.window({
 	                            title: "关联IP",
 	                            width: 350,
 	                            height: 140
@@ -35981,12 +35949,12 @@
 	                        //content.loadtemplate({url:"views/ipRelating.html",async:false,data:{ipList:ipList,VCRIPS:VCRIPS}});
 	                        content.empty().append(__webpack_require__(271)({ ipList: ipList, VCRIPS: VCRIPS }));
 	
-	                        (0, _jquery2['default'])(".ipRelating-wrap-close").on("click", function () {
+	                        (0, _jquery2.default)(".ipRelating-wrap-close").on("click", function () {
 	                            content.close();
 	                        });
-	                        (0, _jquery2['default'])(".ipRelating-wrap-relate").on("click", function () {
-	                            _jquery2['default'].ajax({
-	                                url: "/dbp/service/infra/setVCRFloatIP/" + CRID + "/" + (0, _jquery2['default'])(".ipRelating-wrap-fdip")[0].value + "/" + (0, _jquery2['default'])(".ipRelating-wrap-gdip")[0].value + "/commit",
+	                        (0, _jquery2.default)(".ipRelating-wrap-relate").on("click", function () {
+	                            _jquery2.default.ajax({
+	                                url: "/dbp/service/infra/setVCRFloatIP/" + CRID + "/" + (0, _jquery2.default)(".ipRelating-wrap-fdip")[0].value + "/" + (0, _jquery2.default)(".ipRelating-wrap-gdip")[0].value + "/commit",
 	                                type: 'get',
 	                                success: function success() {
 	                                    content.close();
@@ -35994,43 +35962,43 @@
 	                            });
 	                        });
 	                    }, function () {
-	                        _jquery2['default'].loading(false);
-	                        _jquery2['default'].alert("获取IP失败");
+	                        _jquery2.default.loading(false);
+	                        _jquery2.default.alert("获取IP失败");
 	                    });
 	                });
 	                break;
 	            case "6":
-	                var CRID = (0, _jquery2['default'])(e.currentTarget).data("id");
-	                var core = (0, _jquery2['default'])(e.currentTarget).data("core");
-	                var memory = (0, _jquery2['default'])(e.currentTarget).data("memory");
-	                var disk = (0, _jquery2['default'])(e.currentTarget).data("disk");
+	                var CRID = (0, _jquery2.default)(e.currentTarget).data("id");
+	                var core = (0, _jquery2.default)(e.currentTarget).data("core");
+	                var memory = (0, _jquery2.default)(e.currentTarget).data("memory");
+	                var disk = (0, _jquery2.default)(e.currentTarget).data("disk");
 	                //初始化‘CPU数’
-	                var cpuPromise = _jquery2['default'].ajax({
+	                var cpuPromise = _jquery2.default.ajax({
 	                    url: '/dbp/service/ResAppPool/queryCpu',
 	                    type: 'get',
 	                    dataType: 'json'
 	                });
 	                //初始化‘内存’
-	                var memoryPromise = _jquery2['default'].ajax({
+	                var memoryPromise = _jquery2.default.ajax({
 	                    url: '/dbp/service/ResAppPool/queryMemory',
 	                    type: 'get',
 	                    dataType: 'json'
 	                });
 	                cpuPromise.done(function (cpus) {
 	                    memoryPromise.done(function (memorys) {
-	                        var content = _jquery2['default'].window({ title: "扩容申请", width: 600, height: 210, toolbar: true, callback: function callback() {
-	                                var v = (0, _jquery2['default'])('.inputdisk').val();
+	                        var content = _jquery2.default.window({ title: "扩容申请", width: 600, height: 210, toolbar: true, callback: function callback() {
+	                                var v = (0, _jquery2.default)('.inputdisk').val();
 	                                if (/^\s*\d*\s*$/.test(v) && v - 0 >= disk - 0) {
-	                                    (0, _jquery2['default'])('.inputdisk').val(v - 0);
+	                                    (0, _jquery2.default)('.inputdisk').val(v - 0);
 	                                    submit();
 	                                } else {
-	                                    (0, _jquery2['default'])('.inputdisk').val("");
-	                                    _jquery2['default'].alert('磁盘空间请输入大于' + disk + '的数字！');
+	                                    (0, _jquery2.default)('.inputdisk').val("");
+	                                    _jquery2.default.alert('磁盘空间请输入大于' + disk + '的数字！');
 	                                }
 	
 	                                function submit() {
-	                                    _jquery2['default'].loading(true);
-	                                    _jquery2['default'].ajax({
+	                                    _jquery2.default.loading(true);
+	                                    _jquery2.default.ajax({
 	                                        url: '/dbp/service/expansion/expansionApply',
 	                                        type: 'post',
 	                                        dataType: 'json',
@@ -36045,35 +36013,35 @@
 	                                        },
 	                                        success: function success(v) {
 	                                            content.close();
-	                                            _jquery2['default'].alert(v ? "申请成功" : "申请失败");
-	                                            _jquery2['default'].loading(false);
+	                                            _jquery2.default.alert(v ? "申请成功" : "申请失败");
+	                                            _jquery2.default.loading(false);
 	                                        }
 	                                    });
 	                                }
 	                            } });
 	                        content.empty().append(__webpack_require__(272)({ cpus: cpus, memorys: memorys, nowcpu: core, nowdisk: disk, nowmemory: memory }));
 	                        content.find("li").not(".disable").on("click", function () {
-	                            (0, _jquery2['default'])(this).siblings().removeClass("active");
-	                            (0, _jquery2['default'])(this).addClass("active");
+	                            (0, _jquery2.default)(this).siblings().removeClass("active");
+	                            (0, _jquery2.default)(this).addClass("active");
 	                        });
 	                    });
 	                });
 	                break;
 	            case "7":
-	                var CRID = (0, _jquery2['default'])(e.currentTarget).data("id");
-	                var disk = (0, _jquery2['default'])(e.currentTarget).data("disk");
-	                var content = _jquery2['default'].window({ title: "扩展数据盘", width: 450, height: 150, toolbar: true, callback: function callback() {
-	                        var v = (0, _jquery2['default'])('.inputdisk').val();
+	                var CRID = (0, _jquery2.default)(e.currentTarget).data("id");
+	                var disk = (0, _jquery2.default)(e.currentTarget).data("disk");
+	                var content = _jquery2.default.window({ title: "扩展数据盘", width: 450, height: 150, toolbar: true, callback: function callback() {
+	                        var v = (0, _jquery2.default)('.inputdisk').val();
 	                        if (/^\s*\d*\s*$/.test(v) && v - 0 >= disk - 0) {
-	                            (0, _jquery2['default'])('.inputdisk').val(v - 0);
+	                            (0, _jquery2.default)('.inputdisk').val(v - 0);
 	                            submit();
 	                        } else {
-	                            (0, _jquery2['default'])('.inputdisk').val("");
-	                            _jquery2['default'].alert('磁盘空间请输入小于' + disk + '的数字！');
+	                            (0, _jquery2.default)('.inputdisk').val("");
+	                            _jquery2.default.alert('磁盘空间请输入小于' + disk + '的数字！');
 	                        }
 	                        function submit() {
-	                            _jquery2['default'].loading(true);
-	                            _jquery2['default'].ajax({
+	                            _jquery2.default.loading(true);
+	                            _jquery2.default.ajax({
 	                                url: '/dbp/service/expansion/expansionApply',
 	                                type: 'post',
 	                                dataType: 'json',
@@ -36086,8 +36054,8 @@
 	                                },
 	                                success: function success(v) {
 	                                    content.close();
-	                                    _jquery2['default'].alert(v ? "申请成功" : "申请失败");
-	                                    _jquery2['default'].loading(false);
+	                                    _jquery2.default.alert(v ? "申请成功" : "申请失败");
+	                                    _jquery2.default.loading(false);
 	                                }
 	                            });
 	                        }
@@ -36102,14 +36070,14 @@
 	                window.open('chrome-extension://njphiomhkjnabkjjdbmnnnkplmllinbc/html/nassh.html');
 	                break;
 	            case "9":
-	                var CRID = (0, _jquery2['default'])(e.currentTarget).data("id");
+	                var CRID = (0, _jquery2.default)(e.currentTarget).data("id");
 	                debugger;
 	                //初始化弹出框，返回一个jquery对象
-	                _jquery2['default'].ajax({
+	                _jquery2.default.ajax({
 	                    url: '/dbp/service/Administer/getDataById/' + CRID,
 	                    type: 'post',
 	                    success: function success(value) {
-	                        var win = _jquery2['default'].window({ id: "physicDetailMsg", title: "资源详情信息", close: true, width: 1000, height: 520 });
+	                        var win = _jquery2.default.window({ id: "physicDetailMsg", title: "资源详情信息", close: true, width: 1000, height: 520 });
 	                        win.empty().append(__webpack_require__(274)({ value: eval(value) }));
 	                        //win.loadtemplate({url:"physicDetailMsg.html",async:false,data:eval(value)});
 	                        //绘表
@@ -36121,9 +36089,9 @@
 	                });
 	                break;
 	            default:
-	                var url = (0, _jquery2['default'])(e.currentTarget).data("url");
-	                _jquery2['default'].confirm("确定执行此操作？", function () {
-	                    _jquery2['default'].get(url);
+	                var url = (0, _jquery2.default)(e.currentTarget).data("url");
+	                _jquery2.default.confirm("确定执行此操作？", function () {
+	                    _jquery2.default.get(url);
 	                });
 	        }
 	    },
@@ -36132,29 +36100,30 @@
 	     */
 	    render: function render() {
 	        var data = this.fiterDatas(this.props.listData);
-	        var items = data.map((function (v, i) {
+	        var items = data.map(function (v, i) {
 	            var comMonitorInfo = v.comMonitorInfo || { cpu_USAGE: 0, mem_USAGE: 0, disk_USAGE: 0 };
 	            var vmIcon = '';
 	            var usrIcon = '';
 	            if (v.vmNum) {
-	                vmIcon = _react2['default'].createElement('div', { className: 'deployed' }, _react2['default'].createElement('img', { className: 'cz', src: __webpack_require__(242), onClick: this.itemsClick, 'data-id': v.crId, 'data-name': v.crName }), _react2['default'].createElement('img', { src: __webpack_require__(243) }));
+	                vmIcon = _react2.default.createElement('div', { className: 'deployed' }, _react2.default.createElement('img', { className: 'cz', src: __webpack_require__(242), onClick: this.itemsClick, 'data-id': v.crId, 'data-name': v.crName }), _react2.default.createElement('img', { src: __webpack_require__(243) }));
 	            } else {
 	                if (v.usrId == "0") {
-	                    usrIcon = _react2['default'].createElement('img', { className: 'usr-1', src: __webpack_require__(244) });
+	                    usrIcon = _react2.default.createElement('img', { className: 'usr-1', src: __webpack_require__(244) });
 	                } else if (v.usrId == "9999") {
-	                    usrIcon = _react2['default'].createElement('img', { className: 'usr-3', src: __webpack_require__(245) });
+	                    usrIcon = _react2.default.createElement('img', { className: 'usr-3', src: __webpack_require__(245) });
 	                } else {
-	                    usrIcon = _react2['default'].createElement('img', { className: 'usr-2', src: __webpack_require__(246) });
+	                    usrIcon = _react2.default.createElement('img', { className: 'usr-2', src: __webpack_require__(246) });
 	                }
 	            }
-	            return _react2['default'].createElement('div', { className: 'item', key: v.crId }, _react2['default'].createElement('table', { border: '0' }, _react2['default'].createElement('tbody', null, _react2['default'].createElement('tr', null, _react2['default'].createElement('td', null, _react2['default'].createElement('p', { className: 'Img' }, _react2['default'].createElement('img', { src: __webpack_require__(247)("./status-" + v.comMonitorInfo.showStatus + "-big.png"), width: '40', height: '40' }))), _react2['default'].createElement('td', null, _react2['default'].createElement('span', { className: 'Name' }, v.crName), _react2['default'].createElement('br', null), v.ip), _react2['default'].createElement('td', null)), _react2['default'].createElement('tr', { style: { height: 15 } }, _react2['default'].createElement('td', { style: { textAlign: 'center' } }, 'cpu'), _react2['default'].createElement('td', null, _react2['default'].createElement('div', { className: 'progress progress-striped', style: { height: 15, width: 140, margin: "15px 0px", borderRadius: 0 } }, _react2['default'].createElement('div', { style: { minWidth: '10%', width: comMonitorInfo.cpuallusage + '%', display: comMonitorInfo.cpuallusage ? 'block' : 'none' }, className: 'bar' }, _react2['default'].createElement('span', { className: 'percent', style: { fontSize: '5px', color: 'white' } }, comMonitorInfo.cpuallusage + '%')))), _react2['default'].createElement('td', null)), _react2['default'].createElement('tr', null, _react2['default'].createElement('td', { style: { verticalAlign: 'top', textAlign: 'center' } }, '内存'), _react2['default'].createElement('td', null, _react2['default'].createElement('div', { className: 'progress progress-striped', style: { height: 15, width: 140, marginBottom: 15, borderRadius: 0 } }, _react2['default'].createElement('div', { style: { minWidth: '10%', width: comMonitorInfo.memusage + '%', display: comMonitorInfo.memusage ? 'block' : 'none' }, className: 'bar' }, _react2['default'].createElement('span', { className: 'percent', style: { fontSize: '5px', color: 'white' } }, comMonitorInfo.memusage + '%')))), _react2['default'].createElement('td', { style: { verticalAlign: 'top' } }, v.memorySize * comMonitorInfo.memusage, 'GB/', v.memorySize, 'GB')), _react2['default'].createElement('tr', null, _react2['default'].createElement('td', { style: { verticalAlign: 'top', textAlign: 'center' } }, '硬盘'), _react2['default'].createElement('td', null, _react2['default'].createElement('div', { className: 'progress progress-striped', style: { height: 15, width: 140, borderRadius: 0 } }, _react2['default'].createElement('div', { style: { minWidth: '10%', width: comMonitorInfo.diskusage + '%', display: comMonitorInfo.diskusage ? 'block' : 'none' }, className: 'bar' }, _react2['default'].createElement('span', { className: 'percent', style: { fontSize: '5px', color: 'white' } }, comMonitorInfo.diskusage + "%")))), _react2['default'].createElement('td', { style: { verticalAlign: 'top' } }, comMonitorInfo.diskusedsize, 'GB/', v.diskSize, 'GB')))), vmIcon, usrIcon, _react2['default'].createElement('div', { className: 'btn-group operation-wrap', style: { right: "40px" } }, _react2['default'].createElement('div', { className: 'operation dropdown-toggle', 'data-toggle': 'dropdown' }, '操作'), _react2['default'].createElement('ul', { className: 'dropdown-menu' }, _react2['default'].createElement('li', null, _react2['default'].createElement('a', { 'data-index': '1', 'data-url': "/dbp/service/infra/startVM/" + v.crId, onClick: this.operation }, '开机')), _react2['default'].createElement('li', null, _react2['default'].createElement('a', { 'data-index': '2', 'data-url': "/dbp/service/infra/shutdownVM/" + v.crId, onClick: this.operation }, '关机')), _react2['default'].createElement('li', null, _react2['default'].createElement('a', { 'data-index': '3', 'data-url': "/dbp/service/infra/restartVM/" + v.crId, onClick: this.operation }, '重启')), _react2['default'].createElement('li', null, _react2['default'].createElement('a', { 'data-index': '4', 'data-url': "/dbp/service/infra/VNC/" + v.crId, onClick: this.operation }, 'VNC访问')), v.virtualType === 2 ? "" : _react2['default'].createElement('li', null, _react2['default'].createElement('a', { 'data-index': '5', 'data-id': v.crId, onClick: this.operation }, '关联IP')), v.virtualType === 2 ? "" : _react2['default'].createElement('li', null, _react2['default'].createElement('a', { 'data-index': '6', 'data-id': v.crId, 'data-memory': v.memorySize, 'data-core': v.coreNumber, 'data-disk': v.diskSize, onClick: this.operation }, '扩容申请')), v.virtualType === 2 ? "" : _react2['default'].createElement('li', null, _react2['default'].createElement('a', { 'data-index': '7', 'data-id': v.crId, 'data-disk': v.diskSize, onClick: this.operation }, '扩展数据盘')), v.virtualType === 2 ? "" : _react2['default'].createElement('li', null, _react2['default'].createElement('a', { 'data-index': '9', 'data-id': v.crId, onClick: this.operation }, '详情')))));
-	        }).bind(this));
-	        return _react2['default'].createElement('div', null, items);
+	            return _react2.default.createElement('div', { className: 'item', key: v.crId }, _react2.default.createElement('table', { border: '0' }, _react2.default.createElement('tbody', null, _react2.default.createElement('tr', null, _react2.default.createElement('td', null, _react2.default.createElement('p', { className: 'Img' }, _react2.default.createElement('img', { src: __webpack_require__(247)("./status-" + v.comMonitorInfo.showStatus + "-big.png"), width: '40', height: '40' }))), _react2.default.createElement('td', null, _react2.default.createElement('span', { className: 'Name' }, v.crName), _react2.default.createElement('br', null), v.ip), _react2.default.createElement('td', null)), _react2.default.createElement('tr', { style: { height: 15 } }, _react2.default.createElement('td', { style: { textAlign: 'center' } }, 'cpu'), _react2.default.createElement('td', null, _react2.default.createElement('div', { className: 'progress progress-striped', style: { height: 15, width: 140, margin: "15px 0px", borderRadius: 0 } }, _react2.default.createElement('div', { style: { minWidth: '10%', width: comMonitorInfo.cpuallusage + '%', display: comMonitorInfo.cpuallusage ? 'block' : 'none' }, className: 'bar' }, _react2.default.createElement('span', { className: 'percent', style: { fontSize: '5px', color: 'white' } }, comMonitorInfo.cpuallusage + '%')))), _react2.default.createElement('td', null)), _react2.default.createElement('tr', null, _react2.default.createElement('td', { style: { verticalAlign: 'top', textAlign: 'center' } }, '内存'), _react2.default.createElement('td', null, _react2.default.createElement('div', { className: 'progress progress-striped', style: { height: 15, width: 140, marginBottom: 15, borderRadius: 0 } }, _react2.default.createElement('div', { style: { minWidth: '10%', width: comMonitorInfo.memusage + '%', display: comMonitorInfo.memusage ? 'block' : 'none' }, className: 'bar' }, _react2.default.createElement('span', { className: 'percent', style: { fontSize: '5px', color: 'white' } }, comMonitorInfo.memusage + '%')))), _react2.default.createElement('td', { style: { verticalAlign: 'top' } }, v.memorySize * comMonitorInfo.memusage, 'GB/', v.memorySize, 'GB')), _react2.default.createElement('tr', null, _react2.default.createElement('td', { style: { verticalAlign: 'top', textAlign: 'center' } }, '硬盘'), _react2.default.createElement('td', null, _react2.default.createElement('div', { className: 'progress progress-striped', style: { height: 15, width: 140, borderRadius: 0 } }, _react2.default.createElement('div', { style: { minWidth: '10%', width: comMonitorInfo.diskusage + '%', display: comMonitorInfo.diskusage ? 'block' : 'none' }, className: 'bar' }, _react2.default.createElement('span', { className: 'percent', style: { fontSize: '5px', color: 'white' } }, comMonitorInfo.diskusage + "%")))), _react2.default.createElement('td', { style: { verticalAlign: 'top' } }, comMonitorInfo.diskusedsize, 'GB/', v.diskSize, 'GB')))), vmIcon, usrIcon, _react2.default.createElement('div', { className: 'btn-group operation-wrap', style: { right: "40px" } }, _react2.default.createElement('div', { className: 'operation dropdown-toggle', 'data-toggle': 'dropdown' }, '操作'), _react2.default.createElement('ul', { className: 'dropdown-menu' }, _react2.default.createElement('li', null, _react2.default.createElement('a', { 'data-index': '1', 'data-url': "/dbp/service/infra/startVM/" + v.crId, onClick: this.operation }, '开机')), _react2.default.createElement('li', null, _react2.default.createElement('a', { 'data-index': '2', 'data-url': "/dbp/service/infra/shutdownVM/" + v.crId, onClick: this.operation }, '关机')), _react2.default.createElement('li', null, _react2.default.createElement('a', { 'data-index': '3', 'data-url': "/dbp/service/infra/restartVM/" + v.crId, onClick: this.operation }, '重启')), _react2.default.createElement('li', null, _react2.default.createElement('a', { 'data-index': '4', 'data-url': "/dbp/service/infra/VNC/" + v.crId, onClick: this.operation }, 'VNC访问')), v.virtualType === 2 ? "" : _react2.default.createElement('li', null, _react2.default.createElement('a', { 'data-index': '5', 'data-id': v.crId, onClick: this.operation }, '关联IP')), v.virtualType === 2 ? "" : _react2.default.createElement('li', null, _react2.default.createElement('a', { 'data-index': '6', 'data-id': v.crId, 'data-memory': v.memorySize, 'data-core': v.coreNumber, 'data-disk': v.diskSize, onClick: this.operation }, '扩容申请')), v.virtualType === 2 ? "" : _react2.default.createElement('li', null, _react2.default.createElement('a', { 'data-index': '7', 'data-id': v.crId, 'data-disk': v.diskSize, onClick: this.operation }, '扩展数据盘')), v.virtualType === 2 ? "" : _react2.default.createElement('li', null, _react2.default.createElement('a', { 'data-index': '9', 'data-id': v.crId, onClick: this.operation }, '详情')))));
+	        }.bind(this));
+	        return _react2.default.createElement('div', null, items);
 	    }
-	});
+	}); /**
+	     * Created by 束蓬 on 2015/9/7.
+	     */
 	
-	exports['default'] = ComputerList;
-	module.exports = exports['default'];
+	exports.default = ComputerList;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "vmComputerList.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -36374,18 +36343,11 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	/**
-	 * Created by 束蓬 on 2015/9/11.
-	 */
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	
-	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { 'default': obj };
-	}
 	
 	var _jquery = __webpack_require__(212);
 	
@@ -36395,11 +36357,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _componentDropDownListGonabe_dropDownListJs = __webpack_require__(276);
+	var _gonabe_dropDownList = __webpack_require__(276);
 	
-	var _componentDropDownListGonabe_dropDownListJs2 = _interopRequireDefault(_componentDropDownListGonabe_dropDownListJs);
+	var _gonabe_dropDownList2 = _interopRequireDefault(_gonabe_dropDownList);
 	
-	var VmList = _react2['default'].createClass({
+	function _interopRequireDefault(obj) {
+	    return obj && obj.__esModule ? obj : { default: obj };
+	}
+	
+	var VmList = _react2.default.createClass({
 	    displayName: 'VmList',
 	
 	    /***
@@ -36407,34 +36373,34 @@
 	     */
 	    //隐藏虚拟机列表
 	    hideVmList: function hideVmList() {
-	        (0, _jquery2['default'])(".item").removeClass("active");
-	        (0, _jquery2['default'])(".details-wrap").height(0);
-	        (0, _jquery2['default'])(".main-wrap")[0].style.height = (0, _jquery2['default'])(window).height() - 56 + "px";
+	        (0, _jquery2.default)(".item").removeClass("active");
+	        (0, _jquery2.default)(".details-wrap").height(0);
+	        (0, _jquery2.default)(".main-wrap")[0].style.height = (0, _jquery2.default)(window).height() - 56 + "px";
 	    },
 	    operation: function operation(i, v) {
 	        switch (v.value) {
 	            case "0":
 	                break;
 	            case "4":
-	                _jquery2['default'].get(v.url, function (value) {
+	                _jquery2.default.get(v.url, function (value) {
 	                    var data = JSON.parse(value);
 	                    window.open(data.console.url, "_blank");
-	                    (0, _jquery2['default'])(self).val(0);
+	                    (0, _jquery2.default)(self).val(0);
 	                });
 	                break;
 	            case "5":
 	                var CRID = v.id;
-	                var ipListPromise = _jquery2['default'].ajax({
+	                var ipListPromise = _jquery2.default.ajax({
 	                    url: "/dbp/service/infra/getUseableIPList",
 	                    type: 'get'
 	                });
-	                var VCRIPSPromise = _jquery2['default'].ajax({
+	                var VCRIPSPromise = _jquery2.default.ajax({
 	                    url: "/dbp/service/infra/getVCRIPs/" + CRID,
 	                    type: 'get'
 	                });
 	                ipListPromise.done(function (ipList) {
 	                    VCRIPSPromise.then(function (VCRIPS) {
-	                        var content = _jquery2['default'].window({
+	                        var content = _jquery2.default.window({
 	                            title: "关联IP",
 	                            width: 350,
 	                            height: 140
@@ -36444,12 +36410,12 @@
 	                        //content.loadtemplate({url:"views/ipRelating.html",async:false,data:{ipList:ipList,VCRIPS:VCRIPS}});
 	                        content.empty().append(__webpack_require__(271)({ ipList: ipList, VCRIPS: VCRIPS }));
 	
-	                        (0, _jquery2['default'])(".ipRelating-wrap-close").on("click", function () {
+	                        (0, _jquery2.default)(".ipRelating-wrap-close").on("click", function () {
 	                            content.close();
 	                        });
-	                        (0, _jquery2['default'])(".ipRelating-wrap-relate").on("click", function () {
-	                            _jquery2['default'].ajax({
-	                                url: "/dbp/service/infra/setVCRFloatIP/" + CRID + "/" + (0, _jquery2['default'])(".ipRelating-wrap-fdip")[0].value + "/" + (0, _jquery2['default'])(".ipRelating-wrap-gdip")[0].value + "/commit",
+	                        (0, _jquery2.default)(".ipRelating-wrap-relate").on("click", function () {
+	                            _jquery2.default.ajax({
+	                                url: "/dbp/service/infra/setVCRFloatIP/" + CRID + "/" + (0, _jquery2.default)(".ipRelating-wrap-fdip")[0].value + "/" + (0, _jquery2.default)(".ipRelating-wrap-gdip")[0].value + "/commit",
 	                                type: 'get',
 	                                success: function success() {
 	                                    content.close();
@@ -36457,15 +36423,15 @@
 	                            });
 	                        });
 	                    }, function () {
-	                        _jquery2['default'].alert("获取IP失败");
+	                        _jquery2.default.alert("获取IP失败");
 	                    });
 	                });
 	                break;
 	            default:
-	                _jquery2['default'].confirm("确定执行此操作？", function () {
-	                    _jquery2['default'].get(v.url);
-	                    (0, _jquery2['default'])(this).parent().parent().find(".status").text(v.text);
-	                    (0, _jquery2['default'])(this).val(0);
+	                _jquery2.default.confirm("确定执行此操作？", function () {
+	                    _jquery2.default.get(v.url);
+	                    (0, _jquery2.default)(this).parent().parent().find(".status").text(v.text);
+	                    (0, _jquery2.default)(this).val(0);
 	                });
 	        }
 	    },
@@ -36478,15 +36444,17 @@
 	        var oprationData = [];
 	        var widths = [100, 220, 150, 155, 170, 215, 435, 235];
 	        var data = this.props.listData;
-	        var items = data.map((function (v, i) {
+	        var items = data.map(function (v, i) {
 	            oprationData = [{ value: "0", text: "--请选择--" }, { value: "1", text: "开机", url: "/dbp/service/infra/startVM/" + v.crId }, { value: "2", text: "关机", url: "/dbp/service/infra/shutdownVM/" + v.crId }, { value: "3", text: "重启", url: "/dbp/service/infra/restartVM/" + v.crId }, { value: "4", text: "VNC访问", url: "/dbp/service/infra/VNC/" + v.crId }, { value: "5", text: "关联IP", id: v.crId }];
-	            return _react2['default'].createElement('tr', null, _react2['default'].createElement('td', { style: { width: widths[0] } }, ++i), _react2['default'].createElement('td', { style: { width: widths[1] } }, v.crName), _react2['default'].createElement('td', { style: { width: widths[2] } }, v.osName), _react2['default'].createElement('td', { style: { width: widths[3] } }, this.props.physicsName), _react2['default'].createElement('td', { style: { width: widths[4] } }, v.ip), _react2['default'].createElement('td', { style: { width: widths[5] }, className: 'status' }, status[v.comMonitorInfo.showStatus]), _react2['default'].createElement('td', { style: { width: widths[6] } }, _react2['default'].createElement('span', null, 'CPU：', v.comMonitorInfo.cpuallusage, '% 内存：', v.comMonitorInfo.memswap, 'MB/ ', v.memorySize, 'GB 数据盘：', v.comMonitorInfo.diskusage / 100 * v.diskSize, 'GB/', v.diskSize, 'GB')), _react2['default'].createElement('td', { style: { width: widths[7] } }, _react2['default'].createElement(_componentDropDownListGonabe_dropDownListJs2['default'], { width: '160', data: oprationData, callback: this.operation })));
-	        }).bind(this));
-	        return _react2['default'].createElement('div', null, _react2['default'].createElement('div', { className: 'action' }, _react2['default'].createElement('span', null), _react2['default'].createElement('span', { className: 'remove', onClick: this.hideVmList }, _react2['default'].createElement('img', { src: __webpack_require__(280) })), _react2['default'].createElement('span', { className: 'refresh', onClick: this.getVmListData }, _react2['default'].createElement('img', { src: __webpack_require__(281) }))), _react2['default'].createElement('div', { className: 'content' }, _react2['default'].createElement('table', { className: 'details-table' }, _react2['default'].createElement('thead', null, _react2['default'].createElement('tr', null, _react2['default'].createElement('th', { width: widths[0] }, '序号'), _react2['default'].createElement('th', { width: widths[1] }, '实例ID/名称'), _react2['default'].createElement('th', { width: widths[2] }, '操作系统'), _react2['default'].createElement('th', { width: widths[3] }, '物理机'), _react2['default'].createElement('th', { width: widths[4] }, 'ip地址'), _react2['default'].createElement('th', { width: widths[5] }, '状态（运转中）'), _react2['default'].createElement('th', { width: widths[6] }, '配置'), _react2['default'].createElement('th', { width: widths[7] }, '操作'))), _react2['default'].createElement('tbody', { style: { height: (0, _jquery2['default'])(window).height() * 0.3 - 45 } }, items))));
+	            return _react2.default.createElement('tr', null, _react2.default.createElement('td', { style: { width: widths[0] } }, ++i), _react2.default.createElement('td', { style: { width: widths[1] } }, v.crName), _react2.default.createElement('td', { style: { width: widths[2] } }, v.osName), _react2.default.createElement('td', { style: { width: widths[3] } }, this.props.physicsName), _react2.default.createElement('td', { style: { width: widths[4] } }, v.ip), _react2.default.createElement('td', { style: { width: widths[5] }, className: 'status' }, status[v.comMonitorInfo.showStatus]), _react2.default.createElement('td', { style: { width: widths[6] } }, _react2.default.createElement('span', null, 'CPU：', v.comMonitorInfo.cpuallusage, '% 内存：', v.comMonitorInfo.memswap, 'MB/ ', v.memorySize, 'GB 数据盘：', v.comMonitorInfo.diskusage / 100 * v.diskSize, 'GB/', v.diskSize, 'GB')), _react2.default.createElement('td', { style: { width: widths[7] } }, _react2.default.createElement(_gonabe_dropDownList2.default, { width: '160', data: oprationData, callback: this.operation })));
+	        }.bind(this));
+	        return _react2.default.createElement('div', null, _react2.default.createElement('div', { className: 'action' }, _react2.default.createElement('span', null), _react2.default.createElement('span', { className: 'remove', onClick: this.hideVmList }, _react2.default.createElement('img', { src: __webpack_require__(280) })), _react2.default.createElement('span', { className: 'refresh', onClick: this.getVmListData }, _react2.default.createElement('img', { src: __webpack_require__(281) }))), _react2.default.createElement('div', { className: 'content' }, _react2.default.createElement('table', { className: 'details-table' }, _react2.default.createElement('thead', null, _react2.default.createElement('tr', null, _react2.default.createElement('th', { width: widths[0] }, '序号'), _react2.default.createElement('th', { width: widths[1] }, '实例ID/名称'), _react2.default.createElement('th', { width: widths[2] }, '操作系统'), _react2.default.createElement('th', { width: widths[3] }, '物理机'), _react2.default.createElement('th', { width: widths[4] }, 'ip地址'), _react2.default.createElement('th', { width: widths[5] }, '状态（运转中）'), _react2.default.createElement('th', { width: widths[6] }, '配置'), _react2.default.createElement('th', { width: widths[7] }, '操作'))), _react2.default.createElement('tbody', { style: { height: (0, _jquery2.default)(window).height() * 0.3 - 45 } }, items))));
 	    }
-	});
-	exports['default'] = VmList;
-	module.exports = exports['default'];
+	}); /**
+	     * Created by 束蓬 on 2015/9/11.
+	     */
+	
+	exports.default = VmList;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "vmList.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -36496,18 +36464,11 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	/**
-	 * Created by Administrator on 2015/11/13.
-	 */
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	
-	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { 'default': obj };
-	}
 	
 	var _react = __webpack_require__(18);
 	
@@ -36515,7 +36476,15 @@
 	
 	__webpack_require__(277);
 	
-	var DropDownList = _react2['default'].createClass({
+	function _interopRequireDefault(obj) {
+	    return obj && obj.__esModule ? obj : { default: obj };
+	}
+	
+	/**
+	 * Created by Administrator on 2015/11/13.
+	 */
+	
+	var DropDownList = _react2.default.createClass({
 	    displayName: 'DropDownList',
 	
 	    getInitialState: function getInitialState() {
@@ -36537,6 +36506,7 @@
 	    componentDidUpdate: function componentDidUpdate() {
 	        this.adjust();
 	    },
+	
 	    adjust: function adjust() {
 	        var list = this.refs.list;
 	        var parent = this.refs.main;
@@ -36572,15 +36542,14 @@
 	    render: function render() {
 	        var width = this.props.width ? this.props.width : 200;
 	        var data = this.props.data || [];
-	        var list = data.map((function (v, i) {
-	            return _react2['default'].createElement('li', { onClick: this.select, 'data-index': i }, v.text || "");
-	        }).bind(this));
-	        return _react2['default'].createElement('div', { className: 'dropDwonList', style: { width: width }, ref: 'main' }, _react2['default'].createElement('div', { className: 'dropDwonList-main' }, _react2['default'].createElement('input', { type: 'text', className: 'dropDwonList-input', style: { width: width - 25 }, ref: 'panel', defaultValue: data[0] ? data[0].text : "" }), _react2['default'].createElement('div', { className: 'dropDwonList-icon', onClick: this.toggle, ref: 'icon' })), _react2['default'].createElement('ul', { className: 'dropDwonList-list', ref: 'list', style: { width: width, display: this.state.showList ? "block" : "none" } }, list));
+	        var list = data.map(function (v, i) {
+	            return _react2.default.createElement('li', { onClick: this.select, 'data-index': i }, v.text || "");
+	        }.bind(this));
+	        return _react2.default.createElement('div', { className: 'dropDwonList', style: { width: width }, ref: 'main' }, _react2.default.createElement('div', { className: 'dropDwonList-main' }, _react2.default.createElement('input', { type: 'text', className: 'dropDwonList-input', style: { width: width - 25 }, ref: 'panel', defaultValue: data[0] ? data[0].text : "" }), _react2.default.createElement('div', { className: 'dropDwonList-icon', onClick: this.toggle, ref: 'icon' })), _react2.default.createElement('ul', { className: 'dropDwonList-list', ref: 'list', style: { width: width, display: this.state.showList ? "block" : "none" } }, list));
 	    }
 	});
 	
-	exports['default'] = DropDownList;
-	module.exports = exports['default'];
+	exports.default = DropDownList;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "gonabe_dropDownList.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -36648,17 +36617,29 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
+	"use strict";
+	
+	var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	
+	var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
+	  return typeof obj === "undefined" ? "undefined" : _typeof2(obj);
+	} : function (obj) {
+	  return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof2(obj);
+	};
+	
 	/**
 	* bootstrap.js v3.0.0 by @fat and @mdo
 	* Copyright 2013 Twitter Inc.
 	* http://www.apache.org/licenses/LICENSE-2.0
 	*/
-	"use strict";
+	if (!jQuery) throw new Error("Bootstrap requires jQuery");+function (a) {
+	  "use strict";
 	
-	if (!jQuery) throw new Error("Bootstrap requires jQuery");+(function (a) {
-	  "use strict";function b() {
+	  function b() {
 	    var a = document.createElement("bootstrap"),
-	        b = { WebkitTransition: "webkitTransitionEnd", MozTransition: "transitionend", OTransition: "oTransitionEnd otransitionend", transition: "transitionend" };for (var c in b) if (void 0 !== a.style[c]) return { end: b[c] };
+	        b = { WebkitTransition: "webkitTransitionEnd", MozTransition: "transitionend", OTransition: "oTransitionEnd otransitionend", transition: "transitionend" };for (var c in b) {
+	      if (void 0 !== a.style[c]) return { end: b[c] };
+	    }
 	  }a.fn.emulateTransitionEnd = function (b) {
 	    var c = !1,
 	        d = this;a(this).one(a.support.transition.end, function () {
@@ -36669,8 +36650,10 @@
 	  }, a(function () {
 	    a.support.transition = b();
 	  });
-	})(window.jQuery), +(function (a) {
-	  "use strict";var b = '[data-dismiss="alert"]',
+	}(window.jQuery), +function (a) {
+	  "use strict";
+	
+	  var b = '[data-dismiss="alert"]',
 	      c = function c(_c) {
 	    a(_c).on("click", b, this.close);
 	  };c.prototype.close = function (b) {
@@ -36686,8 +36669,10 @@
 	  }, a.fn.alert.Constructor = c, a.fn.alert.noConflict = function () {
 	    return a.fn.alert = d, this;
 	  }, a(document).on("click.bs.alert.data-api", b, c.prototype.close);
-	})(window.jQuery), +(function (a) {
-	  "use strict";var b = function b(c, d) {
+	}(window.jQuery), +function (a) {
+	  "use strict";
+	
+	  var b = function b(c, d) {
 	    this.$element = a(c), this.options = a.extend({}, b.DEFAULTS, d);
 	  };b.DEFAULTS = { loadingText: "loading..." }, b.prototype.setState = function (a) {
 	    var b = "disabled",
@@ -36704,15 +36689,17 @@
 	    return this.each(function () {
 	      var d = a(this),
 	          e = d.data("bs.button"),
-	          f = "object" == typeof c && c;e || d.data("bs.button", e = new b(this, f)), "toggle" == c ? e.toggle() : c && e.setState(c);
+	          f = "object" == (typeof c === "undefined" ? "undefined" : _typeof(c)) && c;e || d.data("bs.button", e = new b(this, f)), "toggle" == c ? e.toggle() : c && e.setState(c);
 	    });
 	  }, a.fn.button.Constructor = b, a.fn.button.noConflict = function () {
 	    return a.fn.button = c, this;
 	  }, a(document).on("click.bs.button.data-api", "[data-toggle^=button]", function (b) {
 	    var c = a(b.target);c.hasClass("btn") || (c = c.closest(".btn")), c.button("toggle"), b.preventDefault();
 	  });
-	})(window.jQuery), +(function (a) {
-	  "use strict";var b = function b(_b, c) {
+	}(window.jQuery), +function (a) {
+	  "use strict";
+	
+	  var b = function b(_b, c) {
 	    this.$element = a(_b), this.$indicators = this.$element.find(".carousel-indicators"), this.options = c, this.paused = this.sliding = this.interval = this.$active = this.$items = null, "hover" == this.options.pause && this.$element.on("mouseenter", a.proxy(this.pause, this)).on("mouseleave", a.proxy(this.cycle, this));
 	  };b.DEFAULTS = { interval: 5e3, pause: "hover", wrap: !0 }, b.prototype.cycle = function (b) {
 	    return b || (this.paused = !1), this.interval && clearInterval(this.interval), this.options.interval && !this.paused && (this.interval = setInterval(a.proxy(this.next, this), this.options.interval)), this;
@@ -36738,23 +36725,23 @@
 	        i = this;if (!e.length) {
 	      if (!this.options.wrap) return;e = this.$element.find(".item")[h]();
 	    }this.sliding = !0, f && this.pause();var j = a.Event("slide.bs.carousel", { relatedTarget: e[0], direction: g });if (!e.hasClass("active")) {
-	      if ((this.$indicators.length && (this.$indicators.find(".active").removeClass("active"), this.$element.one("slid", function () {
+	      if (this.$indicators.length && (this.$indicators.find(".active").removeClass("active"), this.$element.one("slid", function () {
 	        var b = a(i.$indicators.children()[i.getActiveIndex()]);b && b.addClass("active");
-	      })), a.support.transition && this.$element.hasClass("slide"))) {
-	        if ((this.$element.trigger(j), j.isDefaultPrevented())) return;e.addClass(b), e[0].offsetWidth, d.addClass(g), e.addClass(g), d.one(a.support.transition.end, function () {
+	      })), a.support.transition && this.$element.hasClass("slide")) {
+	        if (this.$element.trigger(j), j.isDefaultPrevented()) return;e.addClass(b), e[0].offsetWidth, d.addClass(g), e.addClass(g), d.one(a.support.transition.end, function () {
 	          e.removeClass([b, g].join(" ")).addClass("active"), d.removeClass(["active", g].join(" ")), i.sliding = !1, setTimeout(function () {
 	            i.$element.trigger("slid");
 	          }, 0);
 	        }).emulateTransitionEnd(600);
 	      } else {
-	        if ((this.$element.trigger(j), j.isDefaultPrevented())) return;d.removeClass("active"), e.addClass("active"), this.sliding = !1, this.$element.trigger("slid");
+	        if (this.$element.trigger(j), j.isDefaultPrevented()) return;d.removeClass("active"), e.addClass("active"), this.sliding = !1, this.$element.trigger("slid");
 	      }return f && this.cycle(), this;
 	    }
 	  };var c = a.fn.carousel;a.fn.carousel = function (c) {
 	    return this.each(function () {
 	      var d = a(this),
 	          e = d.data("bs.carousel"),
-	          f = a.extend({}, b.DEFAULTS, d.data(), "object" == typeof c && c),
+	          f = a.extend({}, b.DEFAULTS, d.data(), "object" == (typeof c === "undefined" ? "undefined" : _typeof(c)) && c),
 	          g = "string" == typeof c ? c : f.slide;e || d.data("bs.carousel", e = new b(this, f)), "number" == typeof c ? e.to(c) : g ? e[g]() : f.interval && e.pause().cycle();
 	    });
 	  }, a.fn.carousel.Constructor = b, a.fn.carousel.noConflict = function () {
@@ -36770,14 +36757,16 @@
 	      var b = a(this);b.carousel(b.data());
 	    });
 	  });
-	})(window.jQuery), +(function (a) {
-	  "use strict";var b = function b(c, d) {
+	}(window.jQuery), +function (a) {
+	  "use strict";
+	
+	  var b = function b(c, d) {
 	    this.$element = a(c), this.options = a.extend({}, b.DEFAULTS, d), this.transitioning = null, this.options.parent && (this.$parent = a(this.options.parent)), this.options.toggle && this.toggle();
 	  };b.DEFAULTS = { toggle: !0 }, b.prototype.dimension = function () {
 	    var a = this.$element.hasClass("width");return a ? "width" : "height";
 	  }, b.prototype.show = function () {
 	    if (!this.transitioning && !this.$element.hasClass("in")) {
-	      var b = a.Event("show.bs.collapse");if ((this.$element.trigger(b), !b.isDefaultPrevented())) {
+	      var b = a.Event("show.bs.collapse");if (this.$element.trigger(b), !b.isDefaultPrevented()) {
 	        var c = this.$parent && this.$parent.find("> .panel > .in");if (c && c.length) {
 	          var d = c.data("bs.collapse");if (d && d.transitioning) return;c.collapse("hide"), d || c.data("bs.collapse", null);
 	        }var e = this.dimension();this.$element.removeClass("collapse").addClass("collapsing")[e](0), this.transitioning = 1;var f = function f() {
@@ -36787,7 +36776,7 @@
 	    }
 	  }, b.prototype.hide = function () {
 	    if (!this.transitioning && this.$element.hasClass("in")) {
-	      var b = a.Event("hide.bs.collapse");if ((this.$element.trigger(b), !b.isDefaultPrevented())) {
+	      var b = a.Event("hide.bs.collapse");if (this.$element.trigger(b), !b.isDefaultPrevented()) {
 	        var c = this.dimension();this.$element[c](this.$element[c]())[0].offsetHeight, this.$element.addClass("collapsing").removeClass("collapse").removeClass("in"), this.transitioning = 1;var d = function d() {
 	          this.transitioning = 0, this.$element.trigger("hidden.bs.collapse").removeClass("collapsing").addClass("collapse");
 	        };return a.support.transition ? (this.$element[c](0).one(a.support.transition.end, a.proxy(d, this)).emulateTransitionEnd(350), void 0) : d.call(this);
@@ -36799,7 +36788,7 @@
 	    return this.each(function () {
 	      var d = a(this),
 	          e = d.data("bs.collapse"),
-	          f = a.extend({}, b.DEFAULTS, d.data(), "object" == typeof c && c);e || d.data("bs.collapse", e = new b(this, f)), "string" == typeof c && e[c]();
+	          f = a.extend({}, b.DEFAULTS, d.data(), "object" == (typeof c === "undefined" ? "undefined" : _typeof(c)) && c);e || d.data("bs.collapse", e = new b(this, f)), "string" == typeof c && e[c]();
 	    });
 	  }, a.fn.collapse.Constructor = b, a.fn.collapse.noConflict = function () {
 	    return a.fn.collapse = c, this;
@@ -36813,8 +36802,10 @@
 	        i = d.attr("data-parent"),
 	        j = i && a(i);g && g.transitioning || (j && j.find('[data-toggle=collapse][data-parent="' + i + '"]').not(d).addClass("collapsed"), d[f.hasClass("in") ? "addClass" : "removeClass"]("collapsed")), f.collapse(h);
 	  });
-	})(window.jQuery), +(function (a) {
-	  "use strict";function b() {
+	}(window.jQuery), +function (a) {
+	  "use strict";
+	
+	  function b() {
 	    a(d).remove(), a(e).each(function (b) {
 	      var d = c(a(this));d.hasClass("open") && (d.trigger(b = a.Event("hide.bs.dropdown")), b.isDefaultPrevented() || d.removeClass("open").trigger("hidden.bs.dropdown"));
 	    });
@@ -36827,13 +36818,13 @@
 	  };f.prototype.toggle = function (d) {
 	    var e = a(this);if (!e.is(".disabled, :disabled")) {
 	      var f = c(e),
-	          g = f.hasClass("open");if ((b(), !g)) {
-	        if (("ontouchstart" in document.documentElement && !f.closest(".navbar-nav").length && a('<div class="dropdown-backdrop"/>').insertAfter(a(this)).on("click", b), f.trigger(d = a.Event("show.bs.dropdown")), d.isDefaultPrevented())) return;f.toggleClass("open").trigger("shown.bs.dropdown"), e.focus();
+	          g = f.hasClass("open");if (b(), !g) {
+	        if ("ontouchstart" in document.documentElement && !f.closest(".navbar-nav").length && a('<div class="dropdown-backdrop"/>').insertAfter(a(this)).on("click", b), f.trigger(d = a.Event("show.bs.dropdown")), d.isDefaultPrevented()) return;f.toggleClass("open").trigger("shown.bs.dropdown"), e.focus();
 	      }return !1;
 	    }
 	  }, f.prototype.keydown = function (b) {
 	    if (/(38|40|27)/.test(b.keyCode)) {
-	      var d = a(this);if ((b.preventDefault(), b.stopPropagation(), !d.is(".disabled, :disabled"))) {
+	      var d = a(this);if (b.preventDefault(), b.stopPropagation(), !d.is(".disabled, :disabled")) {
 	        var f = c(d),
 	            g = f.hasClass("open");if (!g || g && 27 == b.keyCode) return 27 == b.which && f.find(e).focus(), d.click();var h = a("[role=menu] li:not(.divider):visible a", f);if (h.length) {
 	          var i = h.index(h.filter(":focus"));38 == b.keyCode && i > 0 && i--, 40 == b.keyCode && i < h.length - 1 && i++, ~i || (i = 0), h.eq(i).focus();
@@ -36850,8 +36841,10 @@
 	  }, a(document).on("click.bs.dropdown.data-api", b).on("click.bs.dropdown.data-api", ".dropdown form", function (a) {
 	    a.stopPropagation();
 	  }).on("click.bs.dropdown.data-api", e, f.prototype.toggle).on("keydown.bs.dropdown.data-api", e + ", [role=menu]", f.prototype.keydown);
-	})(window.jQuery), +(function (a) {
-	  "use strict";var b = function b(_b2, c) {
+	}(window.jQuery), +function (a) {
+	  "use strict";
+	
+	  var b = function b(_b2, c) {
 	    this.options = c, this.$element = a(_b2), this.$backdrop = this.isShown = null, this.options.remote && this.$element.load(this.options.remote);
 	  };b.DEFAULTS = { backdrop: !0, keyboard: !0, show: !0 }, b.prototype.toggle = function (a) {
 	    return this[this.isShown ? "hide" : "show"](a);
@@ -36880,15 +36873,15 @@
 	    this.$backdrop && this.$backdrop.remove(), this.$backdrop = null;
 	  }, b.prototype.backdrop = function (b) {
 	    var c = this.$element.hasClass("fade") ? "fade" : "";if (this.isShown && this.options.backdrop) {
-	      var d = a.support.transition && c;if ((this.$backdrop = a('<div class="modal-backdrop ' + c + '" />').appendTo(document.body), this.$element.on("click.dismiss.modal", a.proxy(function (a) {
+	      var d = a.support.transition && c;if (this.$backdrop = a('<div class="modal-backdrop ' + c + '" />').appendTo(document.body), this.$element.on("click.dismiss.modal", a.proxy(function (a) {
 	        a.target === a.currentTarget && ("static" == this.options.backdrop ? this.$element[0].focus.call(this.$element[0]) : this.hide.call(this));
-	      }, this)), d && this.$backdrop[0].offsetWidth, this.$backdrop.addClass("in"), !b)) return;d ? this.$backdrop.one(a.support.transition.end, b).emulateTransitionEnd(150) : b();
+	      }, this)), d && this.$backdrop[0].offsetWidth, this.$backdrop.addClass("in"), !b) return;d ? this.$backdrop.one(a.support.transition.end, b).emulateTransitionEnd(150) : b();
 	    } else !this.isShown && this.$backdrop ? (this.$backdrop.removeClass("in"), a.support.transition && this.$element.hasClass("fade") ? this.$backdrop.one(a.support.transition.end, b).emulateTransitionEnd(150) : b()) : b && b();
 	  };var c = a.fn.modal;a.fn.modal = function (c, d) {
 	    return this.each(function () {
 	      var e = a(this),
 	          f = e.data("bs.modal"),
-	          g = a.extend({}, b.DEFAULTS, e.data(), "object" == typeof c && c);f || e.data("bs.modal", f = new b(this, g)), "string" == typeof c ? f[c](d) : g.show && f.show(d);
+	          g = a.extend({}, b.DEFAULTS, e.data(), "object" == (typeof c === "undefined" ? "undefined" : _typeof(c)) && c);f || e.data("bs.modal", f = new b(this, g)), "string" == typeof c ? f[c](d) : g.show && f.show(d);
 	    });
 	  }, a.fn.modal.Constructor = b, a.fn.modal.noConflict = function () {
 	    return a.fn.modal = c, this;
@@ -36904,8 +36897,10 @@
 	  }).on("hidden.bs.modal", ".modal", function () {
 	    a(document.body).removeClass("modal-open");
 	  });
-	})(window.jQuery), +(function (a) {
-	  "use strict";var b = function b(a, _b3) {
+	}(window.jQuery), +function (a) {
+	  "use strict";
+	
+	  var b = function b(a, _b3) {
 	    this.type = this.options = this.enabled = this.timeout = this.hoverState = this.$element = null, this.init("tooltip", a, _b3);
 	  };b.DEFAULTS = { animation: !0, placement: "top", selector: !1, template: '<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>', trigger: "hover focus", title: "", delay: 0, html: !1, container: !1 }, b.prototype.init = function (b, c, d) {
 	    this.enabled = !0, this.type = b, this.$element = a(c), this.options = this.getOptions(d);for (var e = this.options.trigger.split(" "), f = e.length; f--;) {
@@ -36933,7 +36928,7 @@
 	    }, c.options.delay.hide), void 0) : c.hide();
 	  }, b.prototype.show = function () {
 	    var b = a.Event("show.bs." + this.type);if (this.hasContent() && this.enabled) {
-	      if ((this.$element.trigger(b), b.isDefaultPrevented())) return;var c = this.tip();this.setContent(), this.options.animation && c.addClass("fade");var d = "function" == typeof this.options.placement ? this.options.placement.call(this, c[0], this.$element[0]) : this.options.placement,
+	      if (this.$element.trigger(b), b.isDefaultPrevented()) return;var c = this.tip();this.setContent(), this.options.animation && c.addClass("fade");var d = "function" == typeof this.options.placement ? this.options.placement.call(this, c[0], this.$element[0]) : this.options.placement,
 	          e = /\s?auto?\s?/i,
 	          f = e.test(d);f && (d = d.replace(e, "") || "top"), c.detach().css({ top: 0, left: 0, display: "block" }).addClass(d), this.options.container ? c.appendTo(this.options.container) : c.insertAfter(this.$element);var g = this.getPosition(),
 	          h = c[0].offsetWidth,
@@ -36953,7 +36948,7 @@
 	        f = d[0].offsetHeight,
 	        g = parseInt(d.css("margin-top"), 10),
 	        h = parseInt(d.css("margin-left"), 10);isNaN(g) && (g = 0), isNaN(h) && (h = 0), a.top = a.top + g, a.left = a.left + h, d.offset(a).addClass("in");var i = d[0].offsetWidth,
-	        j = d[0].offsetHeight;if (("top" == b && j != f && (c = !0, a.top = a.top + f - j), /bottom|top/.test(b))) {
+	        j = d[0].offsetHeight;if ("top" == b && j != f && (c = !0, a.top = a.top + f - j), /bottom|top/.test(b)) {
 	      var k = 0;a.left < 0 && (k = -2 * a.left, a.left = 0, d.offset(a), i = d[0].offsetWidth, j = d[0].offsetHeight), this.replaceArrow(k - e + i, i, "left");
 	    } else this.replaceArrow(j - f, j, "top");c && d.offset(a);
 	  }, b.prototype.replaceArrow = function (a, b, c) {
@@ -36999,13 +36994,15 @@
 	    return this.each(function () {
 	      var d = a(this),
 	          e = d.data("bs.tooltip"),
-	          f = "object" == typeof c && c;e || d.data("bs.tooltip", e = new b(this, f)), "string" == typeof c && e[c]();
+	          f = "object" == (typeof c === "undefined" ? "undefined" : _typeof(c)) && c;e || d.data("bs.tooltip", e = new b(this, f)), "string" == typeof c && e[c]();
 	    });
 	  }, a.fn.tooltip.Constructor = b, a.fn.tooltip.noConflict = function () {
 	    return a.fn.tooltip = c, this;
 	  };
-	})(window.jQuery), +(function (a) {
-	  "use strict";var b = function b(a, _b4) {
+	}(window.jQuery), +function (a) {
+	  "use strict";
+	
+	  var b = function b(a, _b4) {
 	    this.init("popover", a, _b4);
 	  };if (!a.fn.tooltip) throw new Error("Popover requires tooltip.js");b.DEFAULTS = a.extend({}, a.fn.tooltip.Constructor.DEFAULTS, { placement: "right", trigger: "click", content: "", template: '<div class="popover"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>' }), b.prototype = a.extend({}, a.fn.tooltip.Constructor.prototype), b.prototype.constructor = b, b.prototype.getDefaults = function () {
 	    return b.DEFAULTS;
@@ -37026,13 +37023,15 @@
 	    return this.each(function () {
 	      var d = a(this),
 	          e = d.data("bs.popover"),
-	          f = "object" == typeof c && c;e || d.data("bs.popover", e = new b(this, f)), "string" == typeof c && e[c]();
+	          f = "object" == (typeof c === "undefined" ? "undefined" : _typeof(c)) && c;e || d.data("bs.popover", e = new b(this, f)), "string" == typeof c && e[c]();
 	    });
 	  }, a.fn.popover.Constructor = b, a.fn.popover.noConflict = function () {
 	    return a.fn.popover = c, this;
 	  };
-	})(window.jQuery), +(function (a) {
-	  "use strict";function b(c, d) {
+	}(window.jQuery), +function (a) {
+	  "use strict";
+	
+	  function b(c, d) {
 	    var e,
 	        f = a.proxy(this.process, this);this.$element = a(c).is("body") ? a(window) : a(c), this.$body = a("body"), this.$scrollElement = this.$element.on("scroll.bs.scroll-spy.data-api", f), this.options = a.extend({}, b.DEFAULTS, d), this.selector = (this.options.target || (e = a(c).attr("href")) && e.replace(/.*(?=#[^\s]+$)/, "") || "") + " .nav li > a", this.offsets = a([]), this.targets = a([]), this.activeTarget = null, this.refresh(), this.process();
 	  }b.DEFAULTS = { offset: 10 }, b.prototype.refresh = function () {
@@ -37052,7 +37051,9 @@
 	        d = c - this.$scrollElement.height(),
 	        e = this.offsets,
 	        f = this.targets,
-	        g = this.activeTarget;if (b >= d) return g != (a = f.last()[0]) && this.activate(a);for (a = e.length; a--;) g != f[a] && b >= e[a] && (!e[a + 1] || b <= e[a + 1]) && this.activate(f[a]);
+	        g = this.activeTarget;if (b >= d) return g != (a = f.last()[0]) && this.activate(a);for (a = e.length; a--;) {
+	      g != f[a] && b >= e[a] && (!e[a + 1] || b <= e[a + 1]) && this.activate(f[a]);
+	    }
 	  }, b.prototype.activate = function (b) {
 	    this.activeTarget = b, a(this.selector).parents(".active").removeClass("active");var c = this.selector + '[data-target="' + b + '"],' + this.selector + '[href="' + b + '"]',
 	        d = a(c).parents("li").addClass("active");d.parent(".dropdown-menu").length && (d = d.closest("li.dropdown").addClass("active")), d.trigger("activate");
@@ -37060,7 +37061,7 @@
 	    return this.each(function () {
 	      var d = a(this),
 	          e = d.data("bs.scrollspy"),
-	          f = "object" == typeof c && c;e || d.data("bs.scrollspy", e = new b(this, f)), "string" == typeof c && e[c]();
+	          f = "object" == (typeof c === "undefined" ? "undefined" : _typeof(c)) && c;e || d.data("bs.scrollspy", e = new b(this, f)), "string" == typeof c && e[c]();
 	    });
 	  }, a.fn.scrollspy.Constructor = b, a.fn.scrollspy.noConflict = function () {
 	    return a.fn.scrollspy = c, this;
@@ -37069,15 +37070,17 @@
 	      var b = a(this);b.scrollspy(b.data());
 	    });
 	  });
-	})(window.jQuery), +(function (a) {
-	  "use strict";var b = function b(_b5) {
+	}(window.jQuery), +function (a) {
+	  "use strict";
+	
+	  var b = function b(_b5) {
 	    this.element = a(_b5);
 	  };b.prototype.show = function () {
 	    var b = this.element,
 	        c = b.closest("ul:not(.dropdown-menu)"),
-	        d = b.attr("data-target");if ((d || (d = b.attr("href"), d = d && d.replace(/.*(?=#[^\s]*$)/, "")), !b.parent("li").hasClass("active"))) {
+	        d = b.attr("data-target");if (d || (d = b.attr("href"), d = d && d.replace(/.*(?=#[^\s]*$)/, "")), !b.parent("li").hasClass("active")) {
 	      var e = c.find(".active:last a")[0],
-	          f = a.Event("show.bs.tab", { relatedTarget: e });if ((b.trigger(f), !f.isDefaultPrevented())) {
+	          f = a.Event("show.bs.tab", { relatedTarget: e });if (b.trigger(f), !f.isDefaultPrevented()) {
 	        var g = a(d);this.activate(b.parent("li"), c), this.activate(g, g.parent(), function () {
 	          b.trigger({ type: "shown.bs.tab", relatedTarget: e });
 	        });
@@ -37098,8 +37101,10 @@
 	  }, a(document).on("click.bs.tab.data-api", '[data-toggle="tab"], [data-toggle="pill"]', function (b) {
 	    b.preventDefault(), a(this).tab("show");
 	  });
-	})(window.jQuery), +(function (a) {
-	  "use strict";var b = function b(c, d) {
+	}(window.jQuery), +function (a) {
+	  "use strict";
+	
+	  var b = function b(c, d) {
 	    this.options = a.extend({}, b.DEFAULTS, d), this.$window = a(window).on("scroll.bs.affix.data-api", a.proxy(this.checkPosition, this)).on("click.bs.affix.data-api", a.proxy(this.checkPositionWithEventLoop, this)), this.$element = a(c), this.affixed = this.unpin = null, this.checkPosition();
 	  };b.RESET = "affix affix-top affix-bottom", b.DEFAULTS = { offset: 0 }, b.prototype.checkPositionWithEventLoop = function () {
 	    setTimeout(a.proxy(this.checkPosition, this), 1);
@@ -37110,13 +37115,13 @@
 	          e = this.$element.offset(),
 	          f = this.options.offset,
 	          g = f.top,
-	          h = f.bottom;"object" != typeof f && (h = g = f), "function" == typeof g && (g = f.top()), "function" == typeof h && (h = f.bottom());var i = null != this.unpin && d + this.unpin <= e.top ? !1 : null != h && e.top + this.$element.height() >= c - h ? "bottom" : null != g && g >= d ? "top" : !1;this.affixed !== i && (this.unpin && this.$element.css("top", ""), this.affixed = i, this.unpin = "bottom" == i ? e.top - d : null, this.$element.removeClass(b.RESET).addClass("affix" + (i ? "-" + i : "")), "bottom" == i && this.$element.offset({ top: document.body.offsetHeight - h - this.$element.height() }));
+	          h = f.bottom;"object" != (typeof f === "undefined" ? "undefined" : _typeof(f)) && (h = g = f), "function" == typeof g && (g = f.top()), "function" == typeof h && (h = f.bottom());var i = null != this.unpin && d + this.unpin <= e.top ? !1 : null != h && e.top + this.$element.height() >= c - h ? "bottom" : null != g && g >= d ? "top" : !1;this.affixed !== i && (this.unpin && this.$element.css("top", ""), this.affixed = i, this.unpin = "bottom" == i ? e.top - d : null, this.$element.removeClass(b.RESET).addClass("affix" + (i ? "-" + i : "")), "bottom" == i && this.$element.offset({ top: document.body.offsetHeight - h - this.$element.height() }));
 	    }
 	  };var c = a.fn.affix;a.fn.affix = function (c) {
 	    return this.each(function () {
 	      var d = a(this),
 	          e = d.data("bs.affix"),
-	          f = "object" == typeof c && c;e || d.data("bs.affix", e = new b(this, f)), "string" == typeof c && e[c]();
+	          f = "object" == (typeof c === "undefined" ? "undefined" : _typeof(c)) && c;e || d.data("bs.affix", e = new b(this, f)), "string" == typeof c && e[c]();
 	    });
 	  }, a.fn.affix.Constructor = b, a.fn.affix.noConflict = function () {
 	    return a.fn.affix = c, this;
@@ -37126,7 +37131,7 @@
 	          c = b.data();c.offset = c.offset || {}, c.offsetBottom && (c.offset.bottom = c.offsetBottom), c.offsetTop && (c.offset.top = c.offsetTop), b.affix(c);
 	    });
 	  });
-	})(window.jQuery);
+	}(window.jQuery);
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "bootstrap.min.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -37136,10 +37141,11 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\projects\\github\\rrwSeed\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
+	'use strict';
+	
 	/**
 	 * Created by Administrator on 2016/3/23.
 	 */
-	'use strict';
 	
 	var $ = jQuery;
 	window.operation = function () {
