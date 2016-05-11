@@ -30,6 +30,5 @@ function configureStore(initialState) {
  * 实例化一个store并exoprt
  */
 var store = configureStore()
-
-export default configureStore
-export {store}
+configureStore.store = store
+module.exports = configureStore

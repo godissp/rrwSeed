@@ -14,4 +14,4 @@ var download = function(src){
     ele.remove();
 }
 
-export default download
+module.exports = download

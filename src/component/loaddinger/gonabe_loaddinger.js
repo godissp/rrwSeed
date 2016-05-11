@@ -23,4 +23,4 @@ let Loadinger = React.createClass({
     }
 });
 
-export default Loadinger ;
+module.exports = Loadinger ;

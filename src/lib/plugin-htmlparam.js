@@ -13,4 +13,4 @@ if(url!=location.href){
         paramObj[key] = value;
     });
 }
-export default paramObj;
+module.exports = paramObj;

@@ -101,4 +101,4 @@ const rootReducer = combineReducers({
     tabs,region,statistics,vmstatistics,accordion,computerLists,vmcomputerLists,vmList,accordionList,showSetting,statisticsType
 });
 
-export default rootReducer
+module.exports = rootReducer

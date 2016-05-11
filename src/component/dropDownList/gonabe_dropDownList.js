@@ -16,10 +16,19 @@ let DropDownList = React.createClass({
         }
     },
     componentDidMount:function(){
-        document.body.addEventListener("click",this.hideList)
+        if(document.addEventListener){
+            document.body.addEventListener("click",this.hideList)
+        }else{
+            document.body.attachEvent("click",this.hideList); 
+        }
     },
     componentWillUnmount:function(){
-        document.body.removeEventListener("click",this.hideList)
+        if(document.removeEventListener){
+            document.body.removeEventListener("click",this.hideList)
+        }else{
+            document.body.detachEvent("click",this.hideList); 
+        }
+        
     },
     componentDidUpdate(){
         this.adjust();
@@ -78,4 +87,4 @@ let DropDownList = React.createClass({
     }
 });
 
-export default DropDownList;
+module.exports = DropDownList;

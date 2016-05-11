@@ -6,4 +6,4 @@ import EventTarget from  '../../../lib/plugin-eventTarget.js';
 
 
 
-export default new EventTarget()
+module.exports = new EventTarget()

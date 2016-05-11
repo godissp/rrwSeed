@@ -38,4 +38,4 @@ EventTarget.prototype = {
         }            
     }
 };
-export default EventTarget;
+module.exports = EventTarget;
